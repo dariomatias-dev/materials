@@ -204,3 +204,13 @@ docker ps -a
 ```
 
 Com isso será listado todos os containers criados, incluindo os que não estão rodando.
+
+</br>
+
+## Referencências
+
+<b>- [Documentação Oficial](https://docs.nestjs.com/recipes/prisma)</b>
+
+#### Vídeos
+
+<b>- [Criando uma aplicação com NestJS e PrismaIO - Daniele Leão](https://youtu.be/0Idug0e9tPw?si=D90zAlxB0VBr4peC)</b>
