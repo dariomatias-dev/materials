@@ -20,7 +20,7 @@ pnpm add @nestjs/platform-fastify fastify
 
 Abra o `main.ts` e insirá o seguinte:
 
-```bash
+```typescript
 /// main.ts
 
 import { NestFactory } from '@nestjs/core';
@@ -56,31 +56,31 @@ Obs.:
 
 Há duas maneiras distintas de permitir o acesso à API por clientes de qualquer domínio, mas ambas resultando no mesmo efeito:
 
-```bash
+```typescript
 {
   cors: true,
 }
 ```
 
-```bash
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter({
-      logger: true,
-    }),
-    {
-      cors: true,
-    },
-  );
+```typescript
+const app = await NestFactory.create<NestFastifyApplication>(
+  AppModule,
+  new FastifyAdapter({
+    logger: true,
+  }),
+  {
+    cors: true,
+  },
+);
 ```
 
 <hr></hr>
 
-```bash
+```typescript
 app.enableCors();
 ```
 
-```bash
+```typescript
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -99,7 +99,7 @@ async function bootstrap() {
 
 Se quiser que apenas determinado dominío consiga acessar a API, abra uma chave dentro de `enableCors` e na propriedade `origin` cologue a URL do domínio:
 
-```bash
+```typescript
 app.enableCors({
   origin: 'http://localhost:3000',
 });
@@ -107,7 +107,7 @@ app.enableCors({
 
 É possível também definir quais métodos o dominío irá conseguir acessar, para isso utilize a propriedade `methods` de `enableCors` com os respectivos métodos:
 
-```bash
+```typescript
 methods: 'GET, POST, PUT, PATCH, DELETE',
 
 ou
@@ -115,7 +115,7 @@ ou
 methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 ```
 
-```bash
+```typescript
 app.enableCors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
@@ -130,7 +130,7 @@ Obs.: Os métodos usados são apenas para exemplificação, podendo ser qualquer
 
 Se tiver um dominío que terá as mesmas configurações de um existente, pode adicioná-lo no mesmo `enableCors`, da seguinte maneira:
 
-```bash
+```typescript
 app.enableCors({
   origin: [
     'http://localhost:3000',
@@ -145,7 +145,7 @@ Dessa forma irão compartilhar as mesmas configurações.
 
 No entanto, se os domínios tiverem configurações diferentes, será necessário fazer a sua configuração separadamente:
 
-```bash
+```typescript
 app.enableCors({
   origin: 'http://localhost:3000',
   methods: ['GET'],
@@ -172,3 +172,9 @@ ou
 
 pnpm remove @nestjs/platform-express @types/express
 ```
+
+</br>
+
+## Referencências
+
+<b>- [Documentação Oficial](https://docs.nestjs.com/techniques/performance)</b>
