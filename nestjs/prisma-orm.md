@@ -1,3 +1,9 @@
+<p align="center">
+    <image src="../images/prisma-orm-logo.png" height="200px" alt="Flutter Logo" />
+</p>
+
+</br>
+
 # Instalação e Configuração do Prisma ORM
 
 ## Instalação

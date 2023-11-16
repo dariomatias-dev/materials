@@ -1,3 +1,9 @@
+<p align="center">
+    <image src="../images/fastify-logo.png" height="200px"alt="Flutter Logo" />
+</p>
+
+</br>
+
 # Instalação e configuração do Fastify no NestJS
 
 ## Instalação
