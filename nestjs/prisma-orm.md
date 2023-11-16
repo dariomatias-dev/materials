@@ -117,93 +117,45 @@ Com isso conseguirá usar o `PrismaService` globalmente (de qualquer lugar do pr
 
 Caso queira usar o PostgreSQL no lugar do SQLite, será necessário rodar o banco de dados de alguma forma para conseguir usá-lo, e uma das solução é usar o Docker.
 
-Obs.: Antes de prosseguir será necessário ter o Docker instalado e configurado, juntamente com a imagem do PostgreSQL.
+Para criar o container com o PostgreSQL, leia [Criação de Container de Banco de Dados no Docker](../docker//database.md) na seção <strong>Uso do Banco de Dados PostgreSQL</strong>.
+
+### Prisma
+
+Abra o arquivo `schema.prisma` dentro da pasta `prisma` que está na raiz do projeto, depois mude o `provider` de `sqlite` para `postgresql`:
+
+Antes:
+
+```prisma
+/// prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+```
+
+Depois:
+
+```prisma
+/// prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+Com isso o Prisma passará a usar como banco de dados o PostgreSQL no lugar do SQLite.
 
 ### DotEnv
 
-No `.env` insera as seguintes informações:
+No arquivo `.env` cologue a seguinte URL do banco de dados que o Prisma fará uso:
 
-```typescript
-DB_NAME = [Nome do banco de dados]
-DB_USER = [Nome do usuário]
-DB_PASSWORD = [Senha do banco de dados]
-DB_HOST = localhost
-DB_PORT = [porta do banco de dados]
-
+```bash
 DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 ```
 
-Remova os colchetes e as frases que estão dentro, e preencha-os com os dados necessários.
-
-### Criação do arquivo docker-compose
-
-Próximo passo é criar um container no Docker que irá disponibilizar o banco de dados para ser usado.
-Comece criando um arquivo `docker-compose.yaml` na raiz do projeto, e cologue o seguinte:
-
-```yaml
-version: "3.8"
-
-services:
-  postgres:
-    image: postgres:latest
-    container_name: ${DB_NAME}
-    restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT}:5432"
-
-volumes:
-  pg-data:
-```
-
-Obs.: Caso queira parar o container futuramente, não cologue `restart: always` no seu arquivo `docker-compose.yaml`, se não o container sempre será iniciado quando ligar o PC, mesmo que o tenha parado anteriormente.
-
-Não precisa se preocupar em configurar nada no arquivo `docker-compose.yaml`, os dados necessários serão obtidos do seu `.env` e usados.
-
-Por fim, suba o container:
-
-```bash
-docker-compose up -d
-```
-
-Obs.: Se estiver utilizando Linux e tiver dado erro, cologue `sudo` antes do comando.
-
-### Comandos úteis
-
-#### Parar container
-
-Para parar os containers que estão em execução, primeire use:
-
-```bash
-docker ps
-```
-
-Esse comando irá listar todos os containers que estão atualmente rodando.
-Para parar um container, copie o seu respectivo ID que está na coluna `CONTAINER ID`, depois use o seguinte:
-
-```bash
-docker stop [ID DO CONTAINER]
-```
-
-#### Rodar Container
-
-Para rodá-lo novamente, use:
-
-```bash
-docker start [ID DO CONTAINER]
-```
-
-Possa ser que o tenha parado e esquecido o seu ID, nesse caso use:
-
-```bash
-docker ps -a
-```
-
-Com isso será listado todos os containers criados, incluindo os que não estão rodando.
+As informações `DB_USER, DB_PASSWORD, DB_HOST e DB_NAME` serão obtidas das variáveis de ambiente que inseriu anteriormente, então não será preciso mudar nada.
 
 </br>
 
