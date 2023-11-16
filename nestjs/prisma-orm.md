@@ -121,7 +121,7 @@ Para criar o container com o PostgreSQL, leia [Criação de Container de Banco d
 
 ### Prisma
 
-Abra o arquivo `schema.prisma` dentro da pasta `prisma` que está na raiz do projeto, depois mude o `provider` de `sqlite` para `postgresql`:
+Abra o arquivo `schema.prisma` dentro da pasta `prisma` que está na raiz do projeto, depois mude o `provider` de `sqlite` para `postgresql` caso esteja:
 
 Antes:
 
@@ -155,7 +155,21 @@ No arquivo `.env` cologue a seguinte URL do banco de dados que o Prisma fará us
 DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 ```
 
-As informações `DB_USER, DB_PASSWORD, DB_HOST e DB_NAME` serão obtidas das variáveis de ambiente que inseriu anteriormente, então não será preciso mudar nada.
+As informações `DB_USER, DB_PASSWORD, DB_HOST e DB_NAME` serão obtidas das variáveis de ambiente que inseriu anteriormente na criação do container do PostgreSQL, então não será preciso mudar nada.
+
+### Lembrete
+
+Lembre-se de rodar a migrate novamente para as tabelas definidas no seu `schema.prisma` serem criadas no banco de dados do container, e exclua o arquivo do banco de dados do `SQLite` caso tenha sido criado, visto que não será usado.
+
+### Finalização
+
+Para usar o `PrismaService`, cologue-o no contrutor do `service` que irá usá-lo:
+
+```typescript
+constructor(
+  private readonly prisma: PrismaService,
+) {}
+```
 
 </br>
 
