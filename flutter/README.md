@@ -1,4 +1,6 @@
-# Flutter
+<p align="center">
+    <image src="../images/flutter_logo.png" alt="Flutter Logo" />
+</p>
 
 ## O que é o Flutter?
 
