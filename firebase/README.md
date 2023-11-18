@@ -1,6 +1,6 @@
 # Firebase
 
-## Criação do Projeto no Firebase
+## Criando um Projeto no Firebase
 
 Comece acessando o console do Firebase para criar o seu projeto: [Link](https://console.firebase.google.com/).
 
