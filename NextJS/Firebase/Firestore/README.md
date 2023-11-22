@@ -115,89 +115,19 @@ Obs.: Esse é um exemplo genérico do código de inicialização do firebase, fi
 
 Ao exportar a instância do banco de dados juntamente com os métodos do `firestore`, podemos ter apenas uma importação nos arquivos que irão usar o firebase, em vez de duas ou mais.
 
-### Utilização do Firestore no projeto NextJS
+### Utilização do Firestore em um projeto NextJS
+
+Antes de iniciar as leituras desse tópico, há algumas coisas que preciso salientar para que possa entender melhor o funcionamento do Firestore.
+Para começar, os registros no Firestore são chamados de documentos, o equivalente as colunas em um banco de dados SQL.
+Outro ponto é que o Firestore usa um banco de dados NoSQL, o que significa que não conseguirá criar um padrão de documentos no console do Firestore, tendo que lidar com a padronização dos registros onde o Firestore estiver sendo usado.
 
 Obs.:
 
-- Para poder exemplificar irei utilizar um registro de usuário, com nome, idade e email, Adapte conforme as suas necessidades.
+- Para poder exemplificar irei utilizar um registro de usuário, com nome, idade e email. Adapte os códigos conforme as suas necessidades.
 - Todos os recursos usados do `Firestore` serão importados do arquivo `src/services/firebase/index.ts`.
 
-#### Criação de um registro
+</br>
 
-Para a criação de um registro no Firestore, comece criando uma função com um bloco `try/catch` (para tratamentos de erros), que será responsável por realizar essa tarefa quando chamada:
+Nos READMEs abaixo encontrá explicações de como adicionar, ler, atualizar e excluir registros no seu banco de dados Firestore:
 
-```typescript
-const createUser = async () => {
-  try {
-  } catch (err) {
-    console.error(err);
-
-    /* Crie o seu tratamento de erros aqui */
-  }
-};
-```
-
-Ela terá que ser assíncrona para esperar a requisição de adição de registro ser finalizada, e caso dê algum erro durate o processo, fazer o devido tratamento no bloco `catch`.
-
-Próximo passo será pegar uma referência da coleção onde esse registro será adicionado.
-Para isso crie uma variável com o nome da coleção mais o nome `Collection`.
-Essa função receberá a função `collection` e dentro dela o objeto `db` vírgula o nome da coleção:
-
-```typescript
-const usersCollection = collection(db, "users");
-```
-
-Com o objeto do registro que quer adicionar em mãos, adicione um `await` seguido da função `addDoc`.
-Dentro de `addDoc` cologue a referência da coleção, vírgula o objeto que quer adicionar:
-
-```typescript
-const user = {
-  name: "Dário",
-  age: 18,
-  email: "matiasdario75@gmail.com",
-};
-
-const usersCollection = collection(db, "users");
-await addDoc(usersCollection, user);
-```
-
-Obs.: Também pode ser feito dessa maneira se preferir:
-
-```typescript
-const user = {
-  name: "Dário",
-  age: 18,
-  email: "matiasdario75@gmail.com",
-};
-
-await addDoc(collection(db, "users"), user);
-```
-
-Não precisa se preocupar em criar a coleção, pois caso não exista ainda será criada, e se existir, o registro será adicionado.
-
-Caso queira saber qual é o ID do registro, crie uma variável que irá receber a referência do documento e depois acesse a propriedade `id`:
-
-```typescript
-const docRef = await addDoc(usersCollection, user);
-console.log(docRef.id);
-```
-
-Código final:
-
-```typescript
-const createUser = async () => {
-  try {
-    const user = {
-      name: "Dário",
-      age: 18,
-      email: "matiasdario75@gmail.com",
-    };
-
-    const usersCollection = collection(db, "users");
-    const docRef = await addDoc(usersCollection, user);
-    console.log(docRef.id);
-  } catch (err) {
-    console.error(err);
-  }
-};
-```
+- [Criação de um Documento no Firestore em um Projeto NextJS](./add-record.md)
