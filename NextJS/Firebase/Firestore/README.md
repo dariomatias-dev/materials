@@ -119,19 +119,19 @@ Ao exportar a instância do banco de dados juntamente com os métodos do `firest
 
 Antes de iniciar as leituras desse tópico, há algumas coisas que preciso salientar para que possa entender melhor o funcionamento do Firestore.
 Para começar, os registros no Firestore são chamados de documentos, o equivalente as colunas em um banco de dados SQL.
-Outro ponto é que o Firestore usa um banco de dados NoSQL, o que significa que não conseguirá criar um padrão de documentos no console do Firestore, tendo que lidar com a padronização dos registros onde o Firestore estiver sendo usado.
+Outro ponto é que o Firestore usa um banco de dados NoSQL, o que significa que não conseguirá criar um padrão de documentos no console do Firestore, tendo que lidar com a padronização dos documentos onde o Firestore estiver sendo usado.
 
 Obs.:
 
-- Para poder exemplificar irei utilizar um registro de usuário, com nome, idade e email. Adapte os códigos conforme as suas necessidades.
+- Nos exemplos dos códigos que verá, será utilizado um objeto do tipo `user`, que contém nome, idade e email, e os nomes das variáveis e funções estão em conformidade com o nome da coleção `users` onde esses documentos serão guardados. Contudo, adapte os códigos conforme as suas necessidades, os nomes utilizados são apenas para exemplificar o código.
 - Todos os recursos usados do `Firestore` serão importados do arquivo `src/services/firebase/index.ts`.
 
 </br>
 
-Nos READMEs abaixo encontrá explicações de como adicionar, ler, atualizar e excluir registros no seu banco de dados Firestore:
+Nos READMEs abaixo encontrá explicações de como adicionar, ler, atualizar e excluir documentos no seu banco de dados Firestore:
 
-- [Criação de um Documento no Firestore em um Projeto NextJS](./add-record.md)
+- [Criação de um Documento no Firestore em um Projeto NextJS](./add-document.md)
 - [Obtenção de um Documento do Firestore em um Projeto NextJS](./get-document.md)
 - [Obtenção de Documentos do Firestore em um Projeto NextJS](./get-documents.md)
-- [Atuaização de Documento do Firestore em um Projeto NextJS](./update-document.md)
+- [Atualização de Documento do Firestore em um Projeto NextJS](./update-document.md)
 - [Exclusão de Documento do Firestore em um Projeto NextJS](./delete-document.md)

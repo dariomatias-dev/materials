@@ -1,6 +1,6 @@
 # Obtenção de um Documento do Firestore em um Projeto NextJS
 
-Para obter um documento do Firestore no NextJS, comece criando uma função assíncrona com um bloco `try/catch`:
+Para obter um documento do Firestore no NextJS, comece criando uma função assíncrona com um bloco `try/catch` (para tratamento de erros), que será responsável por realizar essa tarefa quando chamada:
 
 ```typescript
 const getUser = async () => {
@@ -28,7 +28,7 @@ const userDoc = await getDoc(userRef);
 ```
 
 Último passo é verificar se o documento existe.
-A variável que acabou de criar possue um método `exists()`, que ao acessar retornará um booleano indicando se o documento existe ou não.
+A variável que acabou de criar possue um método `exists()`, que permite verificar se o documento existe ou não.
 Sendo assim, só precisamos criar um `if` acessando essa propriedade para fazer a verificação:
 
 ```typescript

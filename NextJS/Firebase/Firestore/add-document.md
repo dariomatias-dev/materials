@@ -4,7 +4,7 @@ Há duas formas de criar um documento no Firestore, sendo a primeira deixando pa
 
 ## Deixar para o banco de dados gerar o ID do documento
 
-Para a criação de um documento no Firestore, comece criando uma função com um bloco `try/catch` (para tratamentos de erros), que será responsável por realizar essa tarefa quando chamada:
+Para a criação de um documento no Firestore, comece criando uma função assíncrona com um bloco `try/catch` (para tratamento de erros), que será responsável por realizar essa tarefa quando chamada:
 
 ```typescript
 const createUser = async () => {
@@ -17,11 +17,9 @@ const createUser = async () => {
 };
 ```
 
-Ela terá que ser assíncrona para esperar a requisição de adição de registro ser finalizada, e caso dê algum erro durate o processo, fazer o devido tratamento no bloco `catch`.
-
-Próximo passo será pegar uma referência da coleção onde esse registro será adicionado.
+Próximo passo será obter uma referência da coleção onde esse registro será adicionado.
 Para isso crie uma variável com o nome da coleção mais o nome `Collection`.
-Essa função receberá a função `collection` e dentro dela o objeto `db` vírgula o nome da coleção:
+Essa função receberá a função `collection` e dentro dela o objeto `db` seguido do nome da coleção:
 
 ```typescript
 const usersCollection = collection(db, "users");
@@ -37,7 +35,6 @@ const user = {
   email: "matiasdario75@gmail.com",
 };
 
-const usersCollection = collection(db, "users");
 await addDoc(usersCollection, user);
 ```
 
@@ -56,6 +53,30 @@ await addDoc(collection(db, "users"), user);
 Nesse caso não criamos uma variável para guardar a referência da coleção, inserindo-a diretamente no `addDoc`.
 
 Não precisa se preocupar em criar a coleção, pois caso ainda não exista será criada, e se existir o registro será adicionado.
+
+Código final:
+
+```typescript
+const createUser = async () => {
+  try {
+    const user = {
+      name: "Dário",
+      age: 18,
+      email: "matiasdario75@gmail.com",
+    };
+
+    const usersCollection = collection(db, "users");
+    const docRef = await addDoc(usersCollection, user);
+    console.log(docRef.id);
+  } catch (err) {
+    console.error(err);
+  }
+};
+```
+
+</br>
+</br>
+</br>
 
 Caso queira saber qual é o ID do registro, crie uma variável que irá receber a referência do documento e depois acesse a propriedade `id`:
 
@@ -88,15 +109,15 @@ const createUser = async () => {
 
 Aconselho que leia antes o tópico anterior caso não tenha lido, visto que o conteúdo desse tópico depende das explicações do anterior: [voltar](#deixar-para-o-banco-de-dados-gerar-o-id-do-documento).
 
-Invéz de obter a referência da coleção, nesse caso será a referência do documento.
-Para isso, crie uma variável com o nome no singular da coleção que será adicionado, mais a palavra `Ref`.
-Essa variável irá receber a função `doc`, dentro dela o objeto `db`, seguido do nome da coleção mais o `ID` do documento:
+Invéz de obter a referência da coleção, nesse caso será criar a referência do documento.
+Para isso, crie uma variável com o nome no singular da coleção onde será adicionado, mais a palavra `Ref`.
+Essa variável irá receber a função `doc`, dentro dela o objeto `db`, seguido do nome da coleção mais o `ID` que quer para o documento:
 
 ```typescript
 const userRef = doc(db, "users", "cf5096ed-cec6-4db1-b14a-56f906631c98");
 ```
 
-Depois no lugar do `addDoc`, cologue `setDoc`:
+No lugar do `addDoc`, ficará `setDoc`:
 
 ```typescript
 await setDoc(usersCollection, user);
