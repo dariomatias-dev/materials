@@ -131,3 +131,4 @@ Obs.:
 Nos READMEs abaixo encontrá explicações de como adicionar, ler, atualizar e excluir registros no seu banco de dados Firestore:
 
 - [Criação de um Documento no Firestore em um Projeto NextJS](./add-record.md)
+- [Obtenção de Documentos do Firestore em um projeto NextJS](./get-documents.md)
