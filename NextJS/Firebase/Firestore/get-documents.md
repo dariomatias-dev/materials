@@ -1,4 +1,4 @@
-# Obtenção de Documentos do Firestore em um projeto NextJS
+# Obtenção de Documentos do Firestore em um Projeto NextJS
 
 Para a obtenção dos documentos no Firestore, comece criando uma função assíncrona com um bloco `try/catch`:
 
