@@ -134,3 +134,4 @@ Nos READMEs abaixo encontrá explicações de como adicionar, ler, atualizar e e
 - [Obtenção de um Documento do Firestore em um Projeto NextJS](./get-document.md)
 - [Obtenção de Documentos do Firestore em um Projeto NextJS](./get-documents.md)
 - [Atuaização de Documento do Firestore em um Projeto NextJS](./update-document.md)
+- [Exclusão de Documento do Firestore em um Projeto NextJS](./delete-document.md)
