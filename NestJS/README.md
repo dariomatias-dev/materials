@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../images/nestjs-logo.png" height="200px" alt="Flutter Logo" />
+    <image src="../logos/nestjs-logo.png" height="150px" alt="Flutter Logo" />
 </p>
 
 </br>

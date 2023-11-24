@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../images/fastify-logo.png" height="200px"alt="Flutter Logo" />
+    <image src="../logos/fastify-logo.png" height="200px"alt="Flutter Logo" />
 </p>
 
 </br>
@@ -181,6 +181,8 @@ pnpm remove @nestjs/platform-express @types/express
 
 </br>
 
-## Referencências
+## Materiais
 
-<b>- [Documentação Oficial](https://docs.nestjs.com/techniques/performance)</b>
+### Site Oficial
+
+- [Documentação Oficial](https://docs.nestjs.com/techniques/performance)

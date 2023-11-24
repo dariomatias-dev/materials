@@ -1,3 +1,9 @@
+<p align="center">
+    <image src="../logos/firebase-logo.png" height="150px" alt="Flutter Logo" />
+</p>
+
+</br>
+
 # Firebase
 
 ## Criando um Projeto no Firebase
@@ -39,3 +45,9 @@ Porém caso já tenha criado um projeto anteriormente, será a seguinte tela que
 <img src="images/configure-google-analytics-screen.png" alt="Configure google analytics screen" />
 
 Porém basta selecionar `Default Account for Firebase` em `Escolha ou crie uma conta do Google Analytics`.
+
+## Materiais
+
+### Site Oficial
+
+- [Firebase](https://firebase.google.com/?hl=pt-br)

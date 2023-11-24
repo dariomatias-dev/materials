@@ -16,6 +16,12 @@ No campo `Local` da Pop-up escolha `southamerica-east1 (São Paulo)`:
 
 <img src="images/create-database-popup.png" alt="Create datanase popup" />
 
-Por fim em `Ativar` e agurde:
+Por fim em `Ativar` e aguarde:
 
 <img src="images/set-rules-popup.png" alt="Set rules popup" />
+
+## Materiais
+
+### Site Oficial
+
+- [Firestore](https://firebase.google.com/docs/firestore?hl=pt-br)

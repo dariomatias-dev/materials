@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../images/flutter-logo.png" alt="Flutter Logo" />
+    <image src="../logos/flutter-logo.png"  height="150px" alt="Flutter Logo" />
 </p>
 
 </br>
@@ -18,16 +18,16 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 ## Materiais
 
+### Site Oficial
+
+- [Flutter](https://flutter.dev/)
+
 ### Playlists
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
 
 - [Curso de FLUTTER 2023 - daves tecnologia](https://www.youtube.com/watch?v=fgloD9-8GNE&list=PL5EmR7zuTn_Yu_YV2pT0h0843vRGiTMtx&pp=iAQB/)
 - [Flutter Curso 2022 - Jacob Moura da Flutterando](https://www.youtube.com/watch?v=Wdn6peqH9ZQ&list=PLlBnICoI-g-fuy5jZiCufhFip1BlBswI7/)
-
-### Site Oficial
-
-- [Flutter](https://flutter.dev/)
 
 ### Links
 
