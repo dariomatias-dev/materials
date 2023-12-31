@@ -20,7 +20,7 @@ Por fim em `Ativar` e aguarde:
 
 <img src="images/set-rules-popup.png" alt="Set rules popup" />
 
-## Materiais
+## Referencências
 
 ### Site Oficial
 

@@ -16,7 +16,7 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [Tailwind CSS // Dicionário do Programador - Código Fonte TV](https://youtu.be/i_EKstz3x04?si=D9iV-UsToxdqirsb/)
 
-## Materiais
+## Referencências
 
 ### Site Oficial
 

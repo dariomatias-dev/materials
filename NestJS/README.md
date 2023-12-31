@@ -11,7 +11,7 @@ O NestJS é um framework TypeScript para desenvolvimento back-end em Node.js, se
 
 Antes de começar os estudos de NestJS, aconselho antes que saiba TypeScript, Express/Fastify, construção de APIs ou outros tipos de serviços que irá usar, pois são vitais para o entendimento do NestJS, visto que foi construído em cima do TypeScript, e faz uso do Express por padrão para a criação de um servidor HTTP (mas pode usar Fastify no lugar), fora que entender a base do serviço que irá criar ajuda no seu desenvolvimento, pois ao usar uma biblioteca/framework muitas coisas que normalmente gerenciaria, são tratadas internamente pelos mesmos, mas que pode ser um problema se não souber o que está sendo feito.
 
-## Materiais
+## Referencências
 
 ### Site Oficial
 

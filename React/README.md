@@ -16,7 +16,7 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [React JS // Dicionário do Programador - Código Fonte TV](https://youtu.be/NhUr8cwDiiM?si=VUqN-L5VfcR9ygb9/)
 
-## Materiais
+## Referencências
 
 ### Site Oficial
 

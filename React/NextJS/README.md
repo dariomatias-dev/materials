@@ -16,7 +16,7 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [Next.js (Renderização React no Lado Servidor) // Dicionário do Programador - Código Fonte TV](https://youtu.be/q_ZoX98uopM?si=D7UCz4ckJqyINzrW/)
 
-## Materiais
+## Referencências
 
 ### Site Oficial
 
