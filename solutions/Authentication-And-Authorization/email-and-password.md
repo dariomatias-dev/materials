@@ -1,32 +1,30 @@
 # Sistema de Autenticação e Autorização
 
-A autenticação e autorização são componentes críticos em qualquer aplicativo, independentemente das tecnologias utilizadas. Este projeto visa oferecer uma abordagem unificada e adaptável, permitindo que desenvolvedores tenham uma base para adicionar as funcionalidades de autenticação e autorização em suas aplicações, independentemente da pilha tecnológica escolhida.
+A autenticação e autorização são componentes críticos em qualquer aplicação, independentemente das tecnologias utilizadas. Este projeto visa explicar uma abordagem unificada e adaptável, permitindo que desenvolvedores tenham uma base para adicionar as funcionalidades de autenticação e autorização em suas aplicações, independentemente da pilha tecnológica escolhida.
 
-Existe várias lógicas de implementação e esse projeto abordará a que utilizo, por essa razão aconselho a pesquisar outras soluções para que possa desenvolver a sua própria.
-
-No momento o projeto conta com uma implementação em Golang, mas futuramente poderá ter outros exemplos em mais linguagens e tecnologias, mas isso não impede que adicione as funcionalidades que serão explicadas em seus projetos, pois as explicações abordam as lógicas de implementação, não estando voltadas a uma Stack de desenvolvimento específica.
+Existe várias abordagens de implementação e esse projeto abordará a com e-mail e senha, por essa razão aconselho a pesquisar outras soluções para que possa aprender mais sobre e desenvolver a sua própria solução.
 
 ## Rotas
 
 As explicações serão voltadas para uma API que possui as seguintes rotas:
 
-### Rotas de autenticação
+#### Rotas de autenticação
 
 **POST (login)**: Login
 **GET (refresh)**: atualização dos tokens
 **Post (validate-email)**: validação de email
 
-### Rotas de usuário
+#### Rotas de usuário
 
 **POST (user)**: criação de usuário
-**GET (user/:id)**: obtenção de usuário com base no seu ID
+**GET (user/:id)**: obtenção de usuário
 **GET (users)**: obtenção dos usuários
 **PATCH (user/:id)**: atualização de usuário
 **DELETE (user/:id)**: exclusão de usuário
 
-Tipos de rotas
+### Tipos de rotas
 
-As rotas serão divididas em dois tipos: públicas e privadas.
+As rotas serão divididas em dois tipos: **públicas** e **privadas**.
 Nas públicas será possível acessar sem a necessidade de um token de acesso, enquanto nas privadas será necessário possuí-lo.
 
 **Rotas públicas**: criação de conta, Login, Refresh e Validação de Email.
@@ -34,18 +32,18 @@ Nas públicas será possível acessar sem a necessidade de um token de acesso, e
 
 ## Cargos
 
-Para acessar determinadas rotas será necessário que o usuário possua determinados cargos, mas, por quais razões? Pelas seguintes:
+Para acessar determinadas rotas será preciso que o usuário possua determinados cargos, mas, por quais razões? Pelas seguintes e outras:
 
-- A rota “users” retorna todos os usuários, seria adequado que qualquer pessoa tivesse acesso a essa rota? Certamente não, ela retorna todos (depende de quais dados escolheu que ela retorne) os dados dos usuários, por isso essa rota deve ser uma rota administrativa, que apenas os administradores do servidor devem ter acesso.
+- A rota “_users_” retorna os dados de todos os usuários, seria adequado que qualquer pessoa tivesse acesso a essa rota? Certamente não, por isso essa rota deve ser uma rota administrativa, que apenas os administradores do servidor devem ter acesso.
 
-- Em um e-commerce haverá uma rota onde os produtos que serão exibidos são adicionados, sendo assim, qualquer pessoa deve conseguir acessar essa rota? Não, apenas os usuários que tiverem determinado cargo como parceiro por exemplo, devem conseguir ter acesso a essa rota, pois para conseguir esse cargo esses usuários devem passar por verificações para diminuir a chance de algo impróprio ser postado, o que não é possível com usuários não verificados e que pode comprometer todo o negócio caso algo desse tipo aconteça.
+- Em um e-commerce haverá uma rota onde os produtos que serão exibidos são adicionados, sendo assim, qualquer pessoa pode conseguir acessar essa rota? Não, apenas os usuários que tiverem determinado cargo como parceiro por exemplo, devem conseguir ter acesso a essa rota, pois para conseguir esse cargo esses usuários devem passar por verificações para diminuir a chance de algo impróprio ser postado, o que não é possível com usuários não verificados, e que pode comprometer todo o negócio caso algo desse tipo aconteça.
 
 ### Tipos de cargos
 
-Para esse projeto, iremos ter os seguintes cargos: usuário (user) e administrador (admin).
+Para esse projeto, iremos ter os seguintes cargos: usuário (**user**) e administrador (**admin**).
 
 As contas que possuírem o cargo de administrador não irão conseguir acessar rotas administrativas, enquanto as que possuírem terão acesso a todas as rotas da aplicação.
-Esses cargos devem ser atribuídos pelo servidor, não sendo possível obtê-los através de uma requisição, pois dessa forma uma conta pode terminar recebendo um cargo que não deveria possuir.
+Esses cargos devem ser atribuídos pelo servidor, não sendo possível obtê-los através de uma requisição, visto que dessa forma uma conta poderia terminar recebendo um cargo que não deveria possuir.
 
 ## Criação de conta
 
@@ -76,22 +74,22 @@ Abaixo está o passo a passo de como deve ser a criação de uma conta:
 - Todos os campos são validados para garantir o correto preenchimento.
 - Caso os dados sejam válidos permite o envio do formulário.
 
-2 - Validação dos dados:
+2 - Criacão da conta pelo servidor:
 
 - Servidor revalida os dados enviados.
 - Verifica se o e-mail já está cadastrado, caso esteja retorna status 409 e informa que o e-mail já está cadastrado, caso não, é criado um novo usuário com status de e-mail não verificado.
-- Criação da conta no banco de dados
 - A senha é criptografada com uma biblioteca de criptografia (geralmente a biblioteca se chama bcrypt).
 - Cargo “user” é atribuído a conta.
-- A conta é criada na tabela de usuários juntamente com a tabela de tokens com os campos access_token e refresh_token vazios.
+- A conta é criada na tabela de usuários juntamente com a tabela de tokens com os campos _access_token_ e _refresh_token_ vazios.
 
-Obs.: Se quiser, pode criar a tabela de tokens quando o usuário fizer o primeiro login. No entanto, esteja atento, será necessário verificar se já existe uma tabela de tokens vinculada ao usuário para atualizá-la ao gerar novos tokens. Caso não exista, terá que criá-la.
+Obs.: Se quiser, pode criar a tabela de tokens quando o usuário fizer o primeiro login, no entanto, esteja atento, será necessário verificar se já existe uma tabela de tokens vinculada ao usuário para atualizá-la ao gerar novos tokens e, caso não exista, terá que criá-la.
 Optei pela abordagem de criá-la quando a conta é criada porquê dessa forma posso simplesmente atualizá-la sem a necessidade de fazer verificações.
 
 ### Verificação do e-mail:
 
 Ao criar uma conta é importante verificar se o endereço de e-mail fornecido é válido, ou seja, existe.
-Existem muitas formas de fazer essa verificação, como SMS, acessar um link, dentre outros. A abordagem que utilizaremos será através de um código de validação enviado para o e-mail fornecido.
+Existem muitas formas de fazer essa verificação, como SMS, acessar um link e dentre outros.
+A abordagem que utilizaremos será através de um código de validação enviado para o e-mail fornecido.
 
 SQL da tabela:
 
@@ -102,7 +100,7 @@ CREATE TABLE
         verification_code VARCHAR(6) NOT NULL,
         expiration_time INTEGER NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-        )
+    )
 ```
 
 Passo a passo:
@@ -121,7 +119,8 @@ Passo a passo:
 3 - Validação do e-mail:
 
 - Servidor realiza busca no banco de dados com base no código enviado para verificar se existe um registro vinculado ao código.
-- Se o registro existir, é verificado se o tempo de expiração é menor que o horário da validação, se for, retorna uma mensagem de erro indicando tempo expirado, caso não, o status do e-mail do usuário passa a ser verificado, e é retornada uma mensagem indicando que o e-mail foi verificado com sucesso.
+- Se o registro existir, é verificado se o tempo de expiração é menor que o horário da validação, se for, retorna uma mensagem de erro indicando tempo expirado (
+  time expired), caso não, o status do e-mail do usuário passa a ser verificado, e é retornada uma mensagem indicando que o e-mail foi verificado com sucesso.
 - Servidor exclui registro do código verificado e cria log de e-mail verificado vinculado ao ID do usuário.
 
 ## Login
@@ -130,19 +129,19 @@ Passo a passo:
 
 - Usuário acessa página de login da aplicação, preenche o formulário de Login com as suas credenciais (e-mail e senha) e envia os dados para o servidor.
 
-2 - Validação:
+2 - Geração dos tokens:
 
 - Servidor revalida os dados enviados.
 - Verifica se há um usuário com o e-mail fornecido.
-- Caso o usuário seja valido, verifique se o número de tentativas de Login é igual a 10, se for veja se a diferença entre o horário atual e da última tentativa de Login seja um valor positivo, se for, retorne status 401 e mensagem de erro: (your account has been temporarily blocked due to multiple unsuccessful login attempts. Please wait for [hours] hours before trying again. If issues persist, contact support).
+- Caso o usuário seja valido, verifique se o número de tentativas de Login é igual a 10, se for, verifica se a diferença entre o horário atual e da última tentativa de Login é um valor positivo, se for, retorne status 401 e mensagem de erro: sua conta foi temporariamente bloqueada devido a várias tentativas de login malsucedidas. Aguarde [quantidade de horas] horas antes de tentar novamente. Se os problemas persistirem, entre em contato com o suporte (your account has been temporarily blocked due to multiple unsuccessful login attempts. Please wait for [quantidade de horas] hours before trying again. If issues persist, contact support).
 - Se a diferença for negativa, significa que as 24 horas se passaram, então pode resetar a quantidade de tentativas de Login para 0.
-- Verifique se a senha enviada e a do usuário são iguais, caso sejam retorne os tokens access_token e refresh_token, caso não, incremente 1 no campo attempts da tabela do usuário de tentativas de Login e retorne status 401 informando e-mail ou senha inválidos (invalid email or password).
+- Verifique se a senha enviada e a do usuário são iguais, caso sejam retorne os tokens **access_token** e **refresh_token**, caso não, incremente 1 no campo **attempts** da tabela de tentativas de Login vinculada ao usuário e retorne status 401 informando e-mail ou senha inválidos (invalid email or password).
 
 ### Número de Tentativas e Bloqueio:
 
-É necessário que seja implementado um sistema de bloqueio quando as tentativas chegarem a determinado número, pois existe o perigo de alguém tentar descobrir as credenciais de acesso (e-mail e senha) de um usuário por meio da tentativa e erro, chamado de ataque de força bruta.
+É necessário que seja implementado um sistema de bloqueio quando as tentativas chegarem a determinado número, pois existe o risco de alguém tentar descobrir as credenciais de acesso (e-mail e senha) de um usuário por meio da tentativa e erro, chamado de ataque de força bruta.
 
-Por essa razão, ao colocar um número máximo de tentativas de Login será preciso esperar determinado tempo até poder fazer Login novamente, o que resulta em uma maior segurança para os usuários, contudo, esteja ciente que existe outros estratégias mais seguras que essa, e que aconselho a implementar, porém são mais trabalhosas de implementar.
+Por essa razão, ao colocar um número máximo de tentativas de Login será preciso esperar determinado tempo até poder fazer Login novamente quando o limite for alcançado, o que resulta em uma maior segurança para os usuários, contudo, esteja ciente que existe outros estratégias mais seguras que essa, e que aconselho a utilizar, porém são mais trabalhosas de implementar.
 
 SQL da tabela:
 
@@ -162,9 +161,9 @@ CREATE TABLE
 - Verifica se o token é do tipo refresh_token.
 - Extrai objeto payload do token com os dados do usuário.
 - Verifica se o tempo de expiração do token é menor que o horário da verificação, caso seja retorna status 401 e informa que o token expirou, sendo necessário realizar Login.
-- Se o token não tiver expirado, busca refresh_token do usuário que corresponde ao ID que está no payload.
+- Se o token não tiver expirado, busque os tokens do usuário que corresponde ao ID que está no payload.
 - Verifica se o refresh_token enviado na requisição é igual ao atual refresh_token do usuário obtido.
-- Se for igual retorna status 200 e gera novos tokens, se for diferente retorna status 401 informando token inválido.
+- Se for igual retorna status 200 e gere novos tokens, se for diferente retorna status 401 informando token inválido (invalid token).
 
 ## Middlewares
 
@@ -237,6 +236,7 @@ CREATE TABLE
 ### Payload
 
 O payload terá os seguintes dados:
+
 - ID do usuário
 - Cargos que possui
 - Tipo do token
@@ -244,10 +244,10 @@ O payload terá os seguintes dados:
 
 ## Códigos de status
 
-- __200 OK__: A solicitação foi bem-sucedida. Não há problemas ou erros a serem relatados, tudo ocorreu conforme o esperado.
+- **200 OK**: A solicitação foi bem-sucedida. Não há problemas ou erros a serem relatados, tudo ocorreu conforme o esperado.
 
-- __201 Created__: A solicitação foi bem-sucedida e um novo recurso foi criado com êxito. É usada quando a criação de um registro ocorreu sem problemas.
+- **201 Created**: A solicitação foi bem-sucedida e um novo recurso foi criado com êxito. É usada quando a criação de um registro ocorreu sem problemas.
 
-- __401 Unauthorized__: A solicitação não foi autorizada. Isso ocorre quando o usuário não possui as credenciais adequadas para acessar a rota ou recurso solicitado.
+- **401 Unauthorized**: A solicitação não foi autorizada. Isso ocorre quando o usuário não possui as credenciais adequadas para acessar a rota ou recurso solicitado.
 
-- __409 Conflict__: A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso alvo. É usado quando há um conflito entre os dados enviados na solicitação e os dados existentes no banco de dados.
+- **409 Conflict**: A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso alvo. É usado quando há um conflito entre os dados enviados na solicitação e os dados existentes no banco de dados.
