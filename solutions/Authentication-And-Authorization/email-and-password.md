@@ -268,3 +268,10 @@ O payload terá os seguintes dados:
 - **401 Unauthorized**: A solicitação não foi autorizada. Isso ocorre quando o usuário não possui as credenciais adequadas para acessar a rota ou recurso solicitado.
 
 - **409 Conflict**: A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso alvo. É usado quando há um conflito entre os dados enviados na solicitação e os dados existentes no banco de dados.
+
+
+## Exemplos
+
+Abaixo encontrará exemplos de aplicações onde foi aplicado o sistema de Autenticação e Autorização explicados, e quais tecnologias foram utilizadas:
+
+- [Golang](https://github.com/dariomatias-dev/go_auth)
