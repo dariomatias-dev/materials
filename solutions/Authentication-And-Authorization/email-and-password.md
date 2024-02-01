@@ -1,8 +1,8 @@
 # Sistema de Autenticação e Autorização
 
-A autenticação e autorização são componentes críticos em qualquer aplicação, independentemente das tecnologias utilizadas. Este projeto visa explicar uma abordagem unificada e adaptável, permitindo que desenvolvedores tenham uma base para adicionar as funcionalidades de autenticação e autorização em suas aplicações, independentemente da pilha tecnológica escolhida.
+A autenticação e autorização são componentes fundamentais em muitas aplicações, independentemente das tecnologias utilizadas. Este material visa explicar uma abordagem unificada e adaptável, permitindo que desenvolvedores tenham uma base para adicionar as funcionalidades de autenticação e autorização em suas aplicações, independentemente da pilha tecnológica escolhida.
 
-Existe várias abordagens de implementação e esse projeto abordará a com e-mail e senha, por essa razão aconselho a pesquisar outras soluções para que possa aprender mais sobre e desenvolver a sua própria solução.
+Existe várias abordagens de implementação e esse material abordará a com e-mail e senha, por essa razão aconselho a pesquisar outras soluções para que possa aprender mais sobre e desenvolver as suas próprias soluções.
 
 ## Rotas
 
@@ -27,6 +27,8 @@ As explicações serão voltadas para uma API que possui as seguintes rotas:
 As rotas serão divididas em dois tipos: **públicas** e **privadas**.
 Nas públicas será possível acessar sem a necessidade de um token de acesso, enquanto nas privadas será necessário possuí-lo.
 
+#### Divisão das rotas:
+
 **Rotas públicas**: criação de conta, Login, Refresh e Validação de Email.
 **Rotas privadas**: todas as rotas que não foram citadas acima.
 
@@ -42,7 +44,7 @@ Para acessar determinadas rotas será preciso que o usuário possua determinados
 
 Para esse projeto, iremos ter os seguintes cargos: usuário (**user**) e administrador (**admin**).
 
-As contas que possuírem o cargo de administrador não irão conseguir acessar rotas administrativas, enquanto as que possuírem terão acesso a todas as rotas da aplicação.
+As contas que não possuírem o cargo de administrador não irão conseguir acessar rotas administrativas, enquanto as que possuírem terão acesso a todas as rotas da aplicação.
 Esses cargos devem ser atribuídos pelo servidor, não sendo possível obtê-los através de uma requisição, visto que dessa forma uma conta poderia terminar recebendo um cargo que não deveria possuir.
 
 ## Criação de conta
@@ -58,9 +60,10 @@ CREATE TABLE
         name VARCHAR(128) UNIQUE NOT NULL,
         age INTEGER NOT NULL,
         email TEXT UNIQUE NOT NULL,
-        valid_email BOOLEAN DEFAULT FALSE,
+        valid_email BOOLEAN NOT NULL,
         password TEXT NOT NULL,
         roles TEXT[] NOT NULL,
+
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 )
@@ -77,13 +80,14 @@ Abaixo está o passo a passo de como deve ser a criação de uma conta:
 2 - Criacão da conta pelo servidor:
 
 - Servidor revalida os dados enviados.
-- Verifica se o e-mail já está cadastrado, caso esteja retorna status 409 e informa que o e-mail já está cadastrado, caso não, é criado um novo usuário com status de e-mail não verificado.
+- Verifica se o e-mail já está cadastrado, caso esteja retorna status 409 e informa que o e-mail já está cadastrado (email is already registered), caso não, é criado um novo usuário com status de e-mail não verificado (false).
 - A senha é criptografada com uma biblioteca de criptografia (geralmente a biblioteca se chama bcrypt).
 - Cargo “user” é atribuído a conta.
-- A conta é criada na tabela de usuários juntamente com a tabela de tokens com os campos _access_token_ e _refresh_token_ vazios.
+- A conta é criada na tabela de usuários, juntamente com as tabelas de tokens e login_attempts.
 
-Obs.: Se quiser, pode criar a tabela de tokens quando o usuário fizer o primeiro login, no entanto, esteja atento, será necessário verificar se já existe uma tabela de tokens vinculada ao usuário para atualizá-la ao gerar novos tokens e, caso não exista, terá que criá-la.
-Optei pela abordagem de criá-la quando a conta é criada porquê dessa forma posso simplesmente atualizá-la sem a necessidade de fazer verificações.
+Obs.: Se quiser, pode criar a tabela de tokens quando o usuário fizer o primeiro login, no entanto, esteja atento, será necessário verificar se já existe uma tabela de tokens vinculada ao usuário quando os tokens forem gerados, pois caso exista irá atualizá-la e caso não exista, terá que criá-la.
+O mesmo vale para a tabela de tentativas de login (login_attempts).
+Optei pela abordagem de criá-las quando a conta é criada, porquê dessa forma posso simplesmente atualizá-las sem a necessidade de fazer verificações.
 
 ### Verificação do e-mail:
 
@@ -99,8 +103,9 @@ CREATE TABLE
         user_id UUID PRIMARY KEY,
         verification_code VARCHAR(6) NOT NULL,
         expiration_time INTEGER NOT NULL,
+
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-    )
+)
 ```
 
 Passo a passo:
@@ -108,7 +113,7 @@ Passo a passo:
 1 - Geração do código de validação de e-mail:
 
 - Código de 6 dígitos aleatórios é gerado pelo servidor.
-- Objeto de registro de validação de e-mail é criado com ID do usuário criado, vinculado ao código gerado e com tempo de expiração de 15 minutos.
+- Objeto de registro de validação de e-mail é criado com ID do usuário recém criado, vinculado ao código gerado e com tempo de expiração de 15 minutos.
 - Registro criado salvo na tabela de validação de e-mail.
 - Servidor envia e-mail para o endereço fornecido, contendo o código gerado e retorna ao site status 200, que redireciona para a página onde o usuário deverá inserir o código de validação.
 
@@ -120,7 +125,7 @@ Passo a passo:
 
 - Servidor realiza busca no banco de dados com base no código enviado para verificar se existe um registro vinculado ao código.
 - Se o registro existir, é verificado se o tempo de expiração é menor que o horário da validação, se for, retorna uma mensagem de erro indicando tempo expirado (
-  time expired), caso não, o status do e-mail do usuário passa a ser verificado, e é retornada uma mensagem indicando que o e-mail foi verificado com sucesso.
+  time expired), caso não, o status do e-mail do usuário passa a ser verificado (true), e é retornada uma mensagem indicando que o e-mail foi verificado com sucesso.
 - Servidor exclui registro do código verificado e cria log de e-mail verificado vinculado ao ID do usuário.
 
 ## Login
@@ -132,10 +137,10 @@ Passo a passo:
 2 - Geração dos tokens:
 
 - Servidor revalida os dados enviados.
-- Verifica se há um usuário com o e-mail fornecido.
-- Caso o usuário seja valido, verifique se o número de tentativas de Login é igual a 10, se for, verifica se a diferença entre o horário atual e da última tentativa de Login é um valor positivo, se for, retorne status 401 e mensagem de erro: sua conta foi temporariamente bloqueada devido a várias tentativas de login malsucedidas. Aguarde [quantidade de horas] horas antes de tentar novamente. Se os problemas persistirem, entre em contato com o suporte (your account has been temporarily blocked due to multiple unsuccessful login attempts. Please wait for [quantidade de horas] hours before trying again. If issues persist, contact support).
+- Verifica busca um usuário com o e-mail fornecido.
+- Caso o usuário exista, obtém o seu registro de tentativas de login (login_attempts) verifique se o número de tentativas é igual a 10, se for, verifica se a diferença entre o horário atual e da última tentativa de Login é um valor positivo, se for, retorne status 401 e mensagem de erro: sua conta foi temporariamente bloqueada devido a várias tentativas de login malsucedidas. Aguarde [quantidade de horas] horas antes de tentar novamente. Se os problemas persistirem, entre em contato com o suporte (your account has been temporarily blocked due to multiple unsuccessful login attempts. Please wait for [quantidade de horas] hours before trying again. If issues persist, contact support).
 - Se a diferença for negativa, significa que as 24 horas se passaram, então pode resetar a quantidade de tentativas de Login para 0.
-- Verifique se a senha enviada e a do usuário são iguais, caso sejam retorne os tokens **access_token** e **refresh_token**, caso não, incremente 1 no campo **attempts** da tabela de tentativas de Login vinculada ao usuário e retorne status 401 informando e-mail ou senha inválidos (invalid email or password).
+- Verifique se a senha enviada e a do usuário são iguais, caso sejam gere os tokens **access_token** e **refresh_token**, caso não, incremente 1 no campo de tentativas (attempts) da tabela de tentativas de Login (login_attempts) vinculada ao usuário e retorne status 401 informando e-mail ou senha inválidos (invalid email or password).
 
 ### Número de Tentativas e Bloqueio:
 
@@ -151,8 +156,9 @@ CREATE TABLE
         user_id UUID PRIMARY KEY,
         attempts INTEGER DEFAULT 0 NOT NULL,
         last_failed_login_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+
         FOREIGN KEY(user_id) REFERENCES users(id)
-        )
+)
 ```
 
 ## Refresh
@@ -213,10 +219,11 @@ SQL da tabela de tokens:
 ```sql
 CREATE TABLE
     IF NOT EXISTS "tokens" (
-        user_id VARCHAR(36) UNIQUE NOT NULL,
+        user_id UUID PRIMARY KEY,
         access_token TEXT DEFAULT '' NOT NULL,
         refresh_token TEXT DEFAULT '' NOT NULL,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+
         FOREIGN KEY(user_id) REFERENCES users(id)
 )
 ```
