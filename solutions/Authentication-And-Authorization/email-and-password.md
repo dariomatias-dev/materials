@@ -12,17 +12,17 @@ As explicações serão voltadas para uma API que possui as seguintes rotas:
 
 #### Rotas de autenticação
 
-**POST (login)**: Login
-**GET (refresh)**: atualização dos tokens
-**Post (validate-email)**: validação de email
+- **POST (login)**: Login
+- **GET (refresh)**: atualização dos tokens
+- **Post (validate-email)**: validação de email
 
 #### Rotas de usuário
 
-**POST (user)**: criação de usuário
-**GET (user/:id)**: obtenção de usuário
-**GET (users)**: obtenção dos usuários
-**PATCH (user/:id)**: atualização de usuário
-**DELETE (user/:id)**: exclusão de usuário
+- **POST (user)**: criação de usuário
+- **GET (user/:id)**: obtenção de usuário
+- **GET (users)**: obtenção dos usuários
+- **PATCH (user/:id)**: atualização de usuário
+- **DELETE (user/:id)**: exclusão de usuário
 
 ### Tipos de rotas
 
@@ -31,8 +31,8 @@ Nas públicas será possível acessar sem a necessidade de um token de acesso, e
 
 #### Divisão das rotas:
 
-**Rotas públicas**: criação de conta, Login, Refresh e Validação de Email.
-**Rotas privadas**: todas as rotas que não foram citadas acima.
+- **Rotas públicas**: criação de conta, Login, Refresh e Validação de Email.
+- **Rotas privadas**: todas as rotas que não foram citadas acima.
 
 ## Cargos
 
@@ -272,6 +272,6 @@ O payload terá os seguintes dados:
 
 ## Exemplos
 
-Abaixo encontrará exemplos de aplicações onde foi aplicado o sistema de Autenticação e Autorização explicados, e quais tecnologias foram utilizadas:
+Abaixo encontrará exemplos de aplicações onde foram aplicados os sistema de Autenticação e Autorização explicados, e quais tecnologias foram utilizadas:
 
 - [Golang](https://github.com/dariomatias-dev/go_auth)
