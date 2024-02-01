@@ -4,6 +4,8 @@ A autenticação e autorização são componentes fundamentais em muitas aplica�
 
 Existe várias abordagens de implementação e esse material abordará a com e-mail e senha, por essa razão aconselho a pesquisar outras soluções para que possa aprender mais sobre e desenvolver as suas próprias soluções.
 
+Aconselho que primeiro leia o material para ter uma ideia do que está sendo explicado. São muitas coisas que precisam ser exclarecidas, então não necessáriamente estão na ordem que devem ser desenvolvidas, mas sim organizadas de maneira que deixe as explicações mais claras, para que consiga desenvolver estando ciente do que precisa ser feito. 
+
 ## Rotas
 
 As explicações serão voltadas para uma API que possui as seguintes rotas:
@@ -46,6 +48,14 @@ Para esse projeto, iremos ter os seguintes cargos: usuário (**user**) e adminis
 
 As contas que não possuírem o cargo de administrador não irão conseguir acessar rotas administrativas, enquanto as que possuírem terão acesso a todas as rotas da aplicação.
 Esses cargos devem ser atribuídos pelo servidor, não sendo possível obtê-los através de uma requisição, visto que dessa forma uma conta poderia terminar recebendo um cargo que não deveria possuir.
+
+
+## Criação de Usuário Administrativo Padrão
+
+Para acessar as rotas administrativas, é necessário que o usuário possua o cargo de administrador (admin), caso contrário não conseguirá acessar as rotas.
+Por essa razão, é importante que seja criado um usuário administrativo padrão do sistema, pois sem ele não será possível criar outros usuários administrativos e acessar as rotas de administração.
+Para criá-lo, comece verificando primeiro se esse usuário já existe no banco de dados, se não existir crie. Não será necessário verificar o e-mail (não faz sentido colocar um e-mail não confiável para um papel extremamente importante como esse), então pode colocar o campo de email válido (valid_email) como verdadeiro (true).
+Tanto o e-mail quando a senha desse usuário guarde em um arquivo .env, para conseguir acessá-los quando necessário, mas ao mesmo tempo manter esses dados seguros.
 
 ## Criação de conta
 
