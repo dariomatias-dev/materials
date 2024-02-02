@@ -4,7 +4,7 @@ A autenticação e autorização são componentes fundamentais em muitas aplica�
 
 Existe várias abordagens de implementação e esse material abordará a com e-mail e senha, por essa razão aconselho a pesquisar outras soluções para que possa aprender mais sobre e desenvolver as suas próprias soluções.
 
-Aconselho que primeiro leia o material para ter uma ideia do que está sendo explicado. São muitas coisas que precisam ser exclarecidas, então não necessáriamente estão na ordem que devem ser desenvolvidas, mas sim organizadas de maneira que deixe as explicações mais claras, para que consiga desenvolver estando ciente do que precisa ser feito. 
+Aconselho que primeiro leia o material para ter uma ideia do que está sendo explicado. São muitas coisas que precisam ser exclarecidas, então não necessáriamente estão na ordem que devem ser desenvolvidas, mas sim organizadas de maneira que deixe as explicações mais claras, para que consiga desenvolver estando ciente do que precisa ser feito.
 
 ## Rotas
 
@@ -48,7 +48,6 @@ Para esse projeto, iremos ter os seguintes cargos: usuário (**user**) e adminis
 
 As contas que não possuírem o cargo de administrador não irão conseguir acessar rotas administrativas, enquanto as que possuírem terão acesso a todas as rotas da aplicação.
 Esses cargos devem ser atribuídos pelo servidor, não sendo possível obtê-los através de uma requisição, visto que dessa forma uma conta poderia terminar recebendo um cargo que não deveria possuir.
-
 
 ## Criação de Usuário Administrativo Padrão
 
@@ -259,6 +258,20 @@ O payload terá os seguintes dados:
 - Tipo do token
 - Tempo de expiração
 
+## Validação da Aplicação
+
+Para verificar se a aplicação que criou está funcionando corretamente, irei indicar alguns testes para validar os sistemas:
+
+- Usuário não consegue fazer Login em conta que o e-mail não foi validado.
+- Usuário não consegue acessar rotas privadas sem token.
+- Usuário não consegue acessar rotas privadas com token refresh.
+- Usuário não consegue acessar rotas onde o ID da requisição é diferente do ID que está no token.
+- Usuário comum não consegue acessar rotas administrativas.
+- Usuário administrativo consegue acessar todas as rotas sem problemas.
+- Não é possível utilizar token com tempo de expiração vencido.
+- Não é possível utilizar token de acesso para obter novos tokens.
+- Não é possível utilizar tokens antigos.
+
 ## Códigos de status
 
 - **200 OK**: A solicitação foi bem-sucedida. Não há problemas ou erros a serem relatados, tudo ocorreu conforme o esperado.
@@ -269,9 +282,11 @@ O payload terá os seguintes dados:
 
 - **409 Conflict**: A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso alvo. É usado quando há um conflito entre os dados enviados na solicitação e os dados existentes no banco de dados.
 
-
 ## Exemplos
 
 Abaixo encontrará exemplos de aplicações onde foram aplicados os sistema de Autenticação e Autorização explicados, e quais tecnologias foram utilizadas:
 
 - [Golang](https://github.com/dariomatias-dev/go_auth)
+
+Caso encontre um erro em alguma das aplicações, por favor, me informe para que possa ser corrigido.
+Cologue a situação em que está acontecendo, para que o problema possa ser rastreado.
