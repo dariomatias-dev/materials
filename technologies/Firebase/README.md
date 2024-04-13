@@ -51,3 +51,6 @@ Porém basta selecionar `Default Account for Firebase` em `Escolha ou crie uma c
 ### Site Oficial
 
 - [Firebase](https://firebase.google.com/?hl=pt-br)
+
+### Documentação
+- [Firebase](https://firebase.google.com/docs?hl=pt)

@@ -17,8 +17,21 @@ Antes de começar os estudos de NestJS, aconselho antes que saiba TypeScript, Ex
 
 - [NestJS](https://nestjs.com/)
 
+### Documentação
+- [NestJS](https://docs.nestjs.com/)
+
 ### Vídeos
 
-- [Programa em Node.js? Então conheça esse framework (NestJS do ZERO) - Rocketseat](https://www.youtube.com/live/TRa55WbWnvQ?si=UiCtYRVJ8BqrmuxT)
-- [Criando uma aplicação com NestJS e PrismaIO - Daniele Leão](https://youtu.be/0Idug0e9tPw?si=E-BIlzB7FgYfaEPy)
-- [Intensivão FC - Nest.js do zero aos microsserviços - Full Cycle](https://www.youtube.com/live/VP5-RKpfHIg?si=lvxa9j0cKncYQpr5)
+- [Programa em Node.js? Então conheça esse framework (NestJS do ZERO) - Rocketseat](https://www.youtube.com/live/TRa55WbWnvQ?si=UiCtYRVJ8BqrmuxT/)
+- [Criando uma aplicação com NestJS e PrismaIO - Daniele Leão](https://youtu.be/0Idug0e9tPw?si=E-BIlzB7FgYfaEPy/)
+- [Intensivão FC - Nest.js do zero aos microsserviços - Full Cycle](https://www.youtube.com/live/VP5-RKpfHIg?si=lvxa9j0cKncYQpr5/)
+
+### Canais
+
+Comunidade:
+- [Full Cycle](https://www.youtube.com/@FullCycle/)
+- [Rocketseat](https://www.youtube.com/@rocketseat/)
+
+### Repositório Oficial
+
+- [NestJS](https://github.com/nestjs/nest/)
