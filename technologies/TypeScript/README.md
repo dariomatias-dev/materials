@@ -26,21 +26,17 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [Documentação do TypeScript](https://www.typescriptlang.org/docs/)
 
-### Links
+### Canais
 
-- [W3Schools - Tutorial TypeScript](https://www.w3schools.com/typescript/)
+Comunidade:
+- [Rocketseat](https://www.youtube.com/@rocketseat/)
+- [Dev Junior Alves](https://www.youtube.com/@devjunioralves/)
 
 ### Playlists
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
 
 - [Glaucia Lemos: TypeScript - Zero to Hero](https://www.youtube.com/watch?v=u7K1sdnCv5Y&list=PLb2HQ45KP0Wsk-p_0c6ImqBAEFEY-LU9H/)
-- 
-### Canais
-
-Comunidade:
-- [Rocketseat](https://www.youtube.com/@rocketseat/)
-- [Dev Junior Alves](https://www.youtube.com/@devjunioralves/)
 
 ### Repositório Oficial
 

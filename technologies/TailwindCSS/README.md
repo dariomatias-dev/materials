@@ -23,7 +23,8 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 - [TailwindCSS](https://tailwindcss.com/)
 
 ### Documentação
-Documentação oficial: [documentação](https://tailwindcss.com/docs/installation/)
+
+- [TailwindCSS](https://tailwindcss.com/docs/installation/)
 
 ### Playlists
 

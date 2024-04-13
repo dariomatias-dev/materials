@@ -49,9 +49,7 @@ Irei indicar os seguintes vídeos do Código Fonte TV do Dicionário do Programa
 - [Git](https://git-scm.com/)
 - [GitHub](https://github.com/)
 
-### Links
-
-Documentações oficiais:
+### Documentações
 
 - [Git](https://git-scm.com/doc)
 - [GitHub](https://docs.github.com/pt)
@@ -61,3 +59,6 @@ Documentações oficiais:
 Logo abaixo, você encontrará algumas playlists para iniciar os seus estudos em Git e GitHub:
 
 - [Curso em Vídeo: Curso de Git e GitHub](https://www.youtube.com/watch?v=xEKo29OWILE&list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
+
+### Repositório Oficial
+- [Git](https://github.com/git/git)

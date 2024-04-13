@@ -26,6 +26,12 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [NextJS](https://nextjs.org/docs/)
 
+### Canais
+
+Comunidade:
+- [Rocketseat](https://www.youtube.com/@rocketseat/)
+- [Full Cycle](https://www.youtube.com/@FullCycle/)
+
 ### Playlists
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em NextJS:
@@ -38,12 +44,6 @@ Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Ne
 
 - [Curso de React Next JS - CFBCursos](https://www.youtube.com/watch?v=k9IG_tPonwo&list=PLx4x_zx8csUhxQHo-w0xAIMrmt8WgAowL&pp=iAQB/)
 - [Curso Intensivo de React e Next 13 - Cod3r Cursos](https://www.youtube.com/watch?v=b2iWK08pCgs&list=PLdPPE0hUkt0q_XT8zDe313e27wFQ-k9fe/)
-
-### Canais
-
-Comunidade:
-- [Rocketseat](https://www.youtube.com/@rocketseat/)
-- [Full Cycle](https://www.youtube.com/@FullCycle/)
 
 ### Repositório Oficial
 

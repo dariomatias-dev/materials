@@ -21,13 +21,6 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 - [MDN Web Docs - JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/)
 - [W3Schools - Tutorial JavaScript](https://www.w3schools.com/js/)
 
-### Playlists
-
-Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
-
--   [Curso em Vídeo: Curso Grátis de JavaScript e ECMAScript para Iniciantes](https://www.youtube.com/watch?v=BXqUH86F-kA&list=PLntvgXM11X6pi7mW0O4ZmfUI1xDSIbmTm/)
--   [Matheus Battisti - Hora de Codar: Curso de JavaScript](https://www.youtube.com/watch?v=TkD0QMyBa28&list=PLnDvRpP8BneysKU8KivhnrVaKpILD3gZ6/)
-
 ### Canais
 
 Comunidade:
@@ -35,6 +28,13 @@ Comunidade:
 - [Matheus Battisti - Hora de Codar](https://www.youtube.com/@MatheusBattisti/)
 - [Dev Junior Alves](https://www.youtube.com/@devjunioralves)
 - [CFBCursos](https://www.youtube.com/@cfbcursos)
+
+### Playlists
+
+Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
+
+-   [Curso em Vídeo: Curso Grátis de JavaScript e ECMAScript para Iniciantes](https://www.youtube.com/watch?v=BXqUH86F-kA&list=PLntvgXM11X6pi7mW0O4ZmfUI1xDSIbmTm/)
+-   [Matheus Battisti - Hora de Codar: Curso de JavaScript](https://www.youtube.com/watch?v=TkD0QMyBa28&list=PLnDvRpP8BneysKU8KivhnrVaKpILD3gZ6/)
 
 ### Guia
 
