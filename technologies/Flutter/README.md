@@ -14,7 +14,7 @@ Outro conselho é sempre que ver um novo widget, ir na documentação para ler u
 
 Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para que possa saber mais a respeito do Flutter:
 
-- [Flutter // Dicionário do Programador - Código Fonte TV](https://youtu.be/XkEA4xT34jg?si=t2W_7s3-TyaHVURK)
+- [Flutter // Dicionário do Programador - Código Fonte TV](https://youtu.be/XkEA4xT34jg?si=t2W_7s3-TyaHVURK/)
 
 ## Referencências
 
@@ -29,15 +29,26 @@ Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Fl
 - [Curso de FLUTTER 2023 - daves tecnologia](https://www.youtube.com/watch?v=fgloD9-8GNE&list=PL5EmR7zuTn_Yu_YV2pT0h0843vRGiTMtx&pp=iAQB/)
 - [Flutter Curso 2022 - Jacob Moura da Flutterando](https://www.youtube.com/watch?v=Wdn6peqH9ZQ&list=PLlBnICoI-g-fuy5jZiCufhFip1BlBswI7/)
 
-### Links
+### Canais
 
-Documentação oficial do Flutter:
+Canal oficial: [Flutter](https://www.youtube.com/@flutterdev/)
 
-- [Documentação](https://docs.flutter.dev/)
+Comunidade:
+- [Flutterando](https://www.youtube.com/@FlutterandoTV/)
+- [Prof. Diego Antunes](https://www.youtube.com/@drantunes/)
+- [Rodrigo Rahman](https://www.youtube.com/@rodrigorahman/)
 
-Site de pacotes do Flutter:
+### Documentação
 
-- [Packages](https://pub.dev/)
+Documentação oficial do Flutter: [Documentação](https://docs.flutter.dev/)
+
+### Pacotes
+
+Pacotes do Flutter: [Packages](https://pub.dev/)
+
+### Repositório Oficial
+
+- [Flutter](https://github.com/flutter/flutter/)
 
 ### Lista de Widgets
 
@@ -51,8 +62,15 @@ Aqui irá encontrar uma série de widgets separados por categorias:
 
 - [Catálogo](https://docs.flutter.dev/ui/widgets/)
 
-### Codelabs & workshops
+### Codelabs & Samples
 
-São tutoriais que ensinam em detalhes a criar algo, explicando passo a passo:
+Materiais que ensinam em detalhes a usar recursos e funcionalidades, explicando passo a passo:
 
-- [Acessar](https://docs.flutter.dev/codelabs/)
+- [Codelabs](https://docs.flutter.dev/codelabs/)
+- [Cookbook](https://docs.flutter.dev/cookbook)
+- [Samples and demos](https://flutter.github.io/samples/#)
+
+### Roadmaps
+
+- [roadmap.sh](https://roadmap.sh/flutter/)
+- [Roadmap para Flutter 2024 (Completo)](https://youtu.be/F2o4QRZ-VIE?si=IgAddmDzgunW_vpM/)
