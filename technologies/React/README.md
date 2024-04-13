@@ -22,6 +22,10 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [React](https://react.dev/)
 
+### Documentação
+
+- [React](https://react.dev/reference/react/)
+
 ### Playlists
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em React:
@@ -29,8 +33,16 @@ Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Re
 - [Curso de React - Matheus Battisti - Hora de Codar](https://www.youtube.com/watch?v=FXqX7oof0I4&list=PLnDvRpP8BneyVA0SZ2okm-QBojomniQVO/)
 - [⭐️ Curso de React com Typescript - Lucas Souza Dev](https://www.youtube.com/watch?v=1bEbBkWc4-I&list=PL29TaWXah3iZktD5o1IHbc7JDqG_80iOm/)
 
-### Links
+### Canais
 
-Documentação oficial do React:
+Comunidade:
+- [Rocketseat](https://www.youtube.com/@rocketseat/)
+- [Matheus Battisti - Hora de Codar](https://www.youtube.com/@MatheusBattisti/)
 
-- [Documentação](https://react.dev/reference/react/)
+### Repositório Oficial
+
+- [React](https://github.com/facebook/react/)
+
+### Roadmaps
+
+- [roadmap.sh](https://roadmap.sh/react/)
