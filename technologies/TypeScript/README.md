@@ -14,9 +14,13 @@ Com uma comunidade ativa e suporte em diversas ferramentas de desenvolvimento, o
 
 Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para que possa saber mais a respeito do TypeScript:
 
-- [TypeScript // Dicionário do Programador - Código Fonte TV](https://youtu.be/gmupEp468lY?si=wmCkx3wspzxZgO5p)
+- [TypeScript // Dicionário do Programador - Código Fonte TV](https://youtu.be/gmupEp468lY?si=wmCkx3wspzxZgO5p/)
 
 ## Referencências
+
+### Site Oficial
+
+- [TypeScript](https://www.typescriptlang.org/)
 
 ### Documentação
 
@@ -30,4 +34,18 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
 
-- [Glaucia Lemos: TypeScript - Zero to Hero](https://www.youtube.com/watch?v=u7K1sdnCv5Y&list=PLb2HQ45KP0Wsk-p_0c6ImqBAEFEY-LU9H)
+- [Glaucia Lemos: TypeScript - Zero to Hero](https://www.youtube.com/watch?v=u7K1sdnCv5Y&list=PLb2HQ45KP0Wsk-p_0c6ImqBAEFEY-LU9H/)
+- 
+### Canais
+
+Comunidade:
+- [Rocketseat](https://www.youtube.com/@rocketseat/)
+- [Dev Junior Alves](https://www.youtube.com/@devjunioralves/)
+
+### Repositório Oficial
+
+- [TypeScript](https://github.com/microsoft/TypeScript/)
+
+### Roadmaps
+
+- [roadmap.sh](https://roadmap.sh/typescript/)
