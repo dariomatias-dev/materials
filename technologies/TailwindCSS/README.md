@@ -22,14 +22,15 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [TailwindCSS](https://tailwindcss.com/)
 
+### Documentação
+Documentação oficial: [documentação](https://tailwindcss.com/docs/installation/)
+
 ### Playlists
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em TailwindCSS:
 
 - [Curso gratuito TailwindCSS 2 - Tiago Matos](https://www.youtube.com/watch?v=1eLaBow7Zbo&list=PLcoYAcR89n-r1m-tMfV4qndrRWpT_rb9u/)
 
-### Links
+### Repositório Oficial
 
-Documentação oficial do TailwindCSS:
-
-- [Documentação](https://tailwindcss.com/docs/installation/)
+- [tailwindcss](https://github.com/tailwindlabs/tailwindcss/)

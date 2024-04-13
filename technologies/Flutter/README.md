@@ -22,6 +22,10 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 - [Flutter](https://flutter.dev/)
 
+### Documentação
+
+Documentação oficial do Flutter: [Documentação](https://docs.flutter.dev/)
+
 ### Playlists
 
 Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
@@ -37,10 +41,6 @@ Comunidade:
 - [Flutterando](https://www.youtube.com/@FlutterandoTV/)
 - [Prof. Diego Antunes](https://www.youtube.com/@drantunes/)
 - [Rodrigo Rahman](https://www.youtube.com/@rodrigorahman/)
-
-### Documentação
-
-Documentação oficial do Flutter: [Documentação](https://docs.flutter.dev/)
 
 ### Pacotes
 
@@ -68,7 +68,7 @@ Materiais que ensinam em detalhes a usar recursos e funcionalidades, explicando 
 
 - [Codelabs](https://docs.flutter.dev/codelabs/)
 - [Cookbook](https://docs.flutter.dev/cookbook)
-- [Samples and demos](https://flutter.github.io/samples/#)
+- [Samples and demos](https://flutter.github.io/samples/)
 
 ### Roadmaps
 
