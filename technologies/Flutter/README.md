@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/flutter-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/flutter-logo.png" height="150px" alt="Flutter Logo" />
 </p>
 
 </br>

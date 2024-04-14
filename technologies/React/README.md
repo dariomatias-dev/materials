@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/react-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/react-logo.png" height="150px" alt="React Logo" />
 </p>
 
 </br>

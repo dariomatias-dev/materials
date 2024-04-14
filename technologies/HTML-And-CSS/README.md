@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/html-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/html-logo.png" height="150px" alt="HTML Logo" />
 </p>
 
 </br>
@@ -13,7 +13,7 @@ HTML é a linguagem padrão para criar páginas web. Trata-se de uma linguagem d
 </br>
 
 <p align="center">
-    <image src="../logos/css-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/css-logo.png" height="150px" alt="CSS Logo" />
 </p>
 
 </br>

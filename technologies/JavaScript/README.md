@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/javascript-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/javascript-logo.png" height="150px" alt="JavaScript Logo" />
 </p>
 
 </br>

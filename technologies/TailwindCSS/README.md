@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/tailwind-css-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/tailwind-css-logo.png" height="150px" alt="TailwindCSS Logo" />
 </p>
 
 </br>

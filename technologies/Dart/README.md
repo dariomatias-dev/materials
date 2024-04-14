@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/dart-logo.png" height="150px" alt="Dart Logo" />
+    <image src="../../logos/dart-logo.png" height="150px" alt="Dart Logo" />
 </p>
 
 </br>

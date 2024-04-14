@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/golang-logo.png" height="150px" alt="GoLang Logo" />
+    <image src="../../logos/golang-logo.png" height="150px" alt="GoLang Logo" />
 </p>
 
 </br>

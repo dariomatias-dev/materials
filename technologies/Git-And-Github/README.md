@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="../logos/git-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/git-logo.png" height="150px" alt="Git Logo" />
 </p>
 
 </br>
@@ -19,7 +19,7 @@ Em resumo, o Git é uma ferramenta fundamental no desenvolvimento de software, p
 </br>
 
 <p align="center">
-    <image src="../logos/github-logo.png"  height="150px" alt="Flutter Logo" />
+    <image src="../../logos/github-logo.png" height="150px" alt="GitHub Logo" />
 </p>
 
 </br>
