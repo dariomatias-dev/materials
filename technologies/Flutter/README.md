@@ -24,7 +24,7 @@ Irei indicar um vídeo do Código Fonte TV do Dicionário do Programador para qu
 
 ### Documentação
 
-Documentação oficial do Flutter: [Documentação](https://docs.flutter.dev/)
+- [Flutter](https://docs.flutter.dev/)
 
 ### Canais
 
@@ -37,14 +37,12 @@ Comunidade:
 
 ### Playlists
 
-Logo abaixo, você encontrará algumas playlists para iniciar seus estudos em Flutter:
-
 - [Curso de FLUTTER 2023 - daves tecnologia](https://www.youtube.com/watch?v=fgloD9-8GNE&list=PL5EmR7zuTn_Yu_YV2pT0h0843vRGiTMtx&pp=iAQB/)
 - [Flutter Curso 2022 - Jacob Moura da Flutterando](https://www.youtube.com/watch?v=Wdn6peqH9ZQ&list=PLlBnICoI-g-fuy5jZiCufhFip1BlBswI7/)
 
 ### Pacotes
 
-Pacotes do Flutter: [Packages](https://pub.dev/)
+- [Packages](https://pub.dev/)
 
 ### Repositório Oficial
 

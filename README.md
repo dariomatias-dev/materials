@@ -26,3 +26,19 @@ Com isso em mente, vamos aos detalhes:
 2. Recomendo que veja os materiais que estão nas referências, pois serão de grande ajuda para melhor esclarecimento das explicações e para o aprofundamento nos temas.
 
 3. Em alguns trechos dos códigos verá três barras, seguidas do caminho do arquivo. O propósito dessa linha é apenas para ajudar a si situar, dando noção exata do caminho (localização) do arquivo, não sendo necessário copiar, pode ignorar.
+
+## Materiais
+Confira abaixo os materiais disponíveis para as respectivas tecnologias:
+
+- [Dart](technologies/Dart/README.md)
+- [Firebase](technologies/Firebase/README.md)
+- [Flutter](technologies/Flutter/README.md)
+- [Git-And-GitHub](technologies/Git-And-GitHub/README.md)
+- [GoLang](technologies/GoLang/README.md)
+- [HTML-And-CSS](technologies/HTML-And-CSS/README.md)
+- [JavaScript](technologies/JavaScript/README.md)
+- [NestJS](technologies/NestJS/README.md)
+- [NextJS](technologies/NextJS/README.md)
+- [React](technologies/React/README.md)
+- [TailwindCSS](technologies/TailwindCSS/README.md)
+- [TypeScript](technologies/TypeScript/README.md)
