@@ -32,10 +32,10 @@ flutter:
 
 ## 3. Crie o Arquivo de Configuração
 
-Na raiz do seu projeto, crie um arquivo chamado `l10n.yaml`. Insira as seguintes configurações nele:
+Na raiz do seu projeto, crie um arquivo chamado `l10n.yaml`. Nele insira as seguintes configurações:
 
 ```yaml
-arb-dir: lib/l10n
+arb-dir: lib\l10n
 template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 ```
@@ -46,7 +46,7 @@ output-localization-file: app_localizations.dart
 
 ## 4. Criação das Traduções
 
-1. Na pasta `lib`, crie uma subpasta chamada `l10n` e adicione um arquivo `l10n.dart` com o seguinte código:
+1 - Na pasta `lib`, crie uma subpasta chamada `l10n` e adicione um arquivo `l10n.dart` com o seguinte código:
 
 ```dart
 import 'dart:ui';
@@ -59,25 +59,41 @@ class L10n {
 }
 ```
 
-Nesta lista, adicione todos os idiomas que você deseja suportar.
+Nesta lista, adicione todos os idiomas que deseja oferecer suporte.
 
-2. Na pasta `l10n`, crie arquivos para cada idioma seguindo o padrão de nomeação `app_[código do idioma].arb`. Em cada arquivo, defina o idioma das traduções assim:
+2 - Na pasta `l10n`, crie arquivos para cada idioma seguindo o padrão de nomeação `app_[código do idioma].arb`. Em cada arquivo, defina o idioma das traduções assim:
 
 ```json
 {
-    "@@locale": "en"
+  "@@locale": "en"
 }
 ```
 
+Obs.: Para idiomas variantes, é necessário definir uma língua base para garantir que, quando uma variante específica (como `pt_BR`) não estiver disponível ou completa, o sistema possa utilizar a versão genérica da língua (como `pt`). Isso assegura que o conteúdo da aplicação seja exibido corretamente, mesmo na ausência de traduções específicas, evitando erros e melhorando a experiência do usuário.
+
+3 - Para criar as traduções, escolha uma chave e a use em todos os arquivos `.arb` com a respectiva tradução.
+
+Obs.: A chave deve ser idêntica em todos os arquivos. Se você usar nomes diferentes, serão consideradas chaves distintas, mesmo que se refiram à mesma palavra.
+
 ### Exemplo de Traduções
 
-- **Inglês (`app_en.arb`)**:
+- **English (`app_en.arb`)**:
 
 ```json
 {
-    "@@locale": "en",
-    "title": "Title",
-    "description": "Description"
+  "@@locale": "en",
+  "title": "Title",
+  "description": "Description"
+}
+```
+
+- **Português (`app_pt.arb`)**:
+
+```json
+{
+  "@@locale": "pt",
+  "title": "Título",
+  "description": "Descrição"
 }
 ```
 
@@ -85,9 +101,9 @@ Nesta lista, adicione todos os idiomas que você deseja suportar.
 
 ```json
 {
-    "@@locale": "pt_BR",
-    "title": "Título",
-    "description": "Descrição"
+  "@@locale": "pt_BR",
+  "title": "Título",
+  "description": "Descrição"
 }
 ```
 
