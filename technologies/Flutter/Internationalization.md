@@ -1,10 +1,12 @@
-# Internacionalização
+# Internacionalização no Flutter
 
-Siga os passos abaixo para adicionar internacionalização no seu aplicativo Flutter:
+Para adicionar suporte à internacionalização no seu aplicativo Flutter, siga os passos abaixo:
 
-Abra o arquivo `pubspec.yaml` e adicione `flutter_localizations` nas dependências de desenvolvimento:
+## 1. Adicione Dependências
 
-```bash
+Abra o arquivo `pubspec.yaml` e inclua `flutter_localizations` nas dependências de desenvolvimento:
+
+```yaml
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -12,19 +14,25 @@ dev_dependencies:
     sdk: flutter
 ```
 
-Agora rode `flutter pub get` para obter as dependências.
-
-Em `flutter`, adicione `generate: true` para permitir a geração das traduções:
+Depois, execute o comando a seguir para instalar as dependências:
 
 ```bash
+flutter pub get
+```
+
+## 2. Habilite Geração de Traduções
+
+Em `pubspec.yaml`, adicione `generate: true` para permitir a geração automática das traduções:
+
+```yaml
 flutter:
   uses-material-design: true
   generate: true
 ```
 
-Na raiz do projeto, crie um arquivo chamado `l10n.yaml`.
+## 3. Crie o Arquivo de Configuração
 
-No arquivo `l10n.yaml`, insira as seguintes configurações:
+Na raiz do seu projeto, crie um arquivo chamado `l10n.yaml`. Insira as seguintes configurações nele:
 
 ```yaml
 arb-dir: lib/l10n
@@ -32,13 +40,13 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 ```
 
-Em `arb-dir` é definido onde os arquivos `.arb` (Application Resource Bundle) estão armazenados.
-Na chave `template-arb-file` será especificado o arquivo de template (modelo) que será usado como base das traduções.
-A chave `output-localization-file` será para definir o nome do arquivo de saída para as traduções geradas.
+- **arb-dir**: Define o diretório onde os arquivos `.arb` (Application Resource Bundle) serão armazenados.
+- **template-arb-file**: Especifica o arquivo de modelo que servirá de base para as traduções.
+- **output-localization-file**: Define o nome do arquivo onde as traduções geradas serão salvas.
 
-## Criação das Traduções
+## 4. Criação das Traduções
 
-Na pasta `lib` crie uma pasta com o nome `l10n`, e um arquivo `l10n.dart`, com o seguinte código:
+1. Na pasta `lib`, crie uma subpasta chamada `l10n` e adicione um arquivo `l10n.dart` com o seguinte código:
 
 ```dart
 import 'dart:ui';
@@ -51,20 +59,19 @@ class L10n {
 }
 ```
 
-Dentro dessa lista deve ser colocado todos os idiomas que serão suportados.
+Nesta lista, adicione todos os idiomas que você deseja suportar.
 
-Em `l10n` ficará os arquivos com as traduções, que seguem o padrão de nomeação: `app_[código do idioma].arb`.
-Em todos os arquivos deve ser definido o idioma das traduções, como:
+2. Na pasta `l10n`, crie arquivos para cada idioma seguindo o padrão de nomeação `app_[código do idioma].arb`. Em cada arquivo, defina o idioma das traduções assim:
 
 ```json
 {
-    "@@locale": "en",
+    "@@locale": "en"
 }
 ```
 
-Em todos os arquivo deve ser usado a mesma chave para se referir a mesma tradução:
+### Exemplo de Traduções
 
-1 - Inglês:
+- **Inglês (`app_en.arb`)**:
 
 ```json
 {
@@ -74,7 +81,7 @@ Em todos os arquivo deve ser usado a mesma chave para se referir a mesma traduç
 }
 ```
 
-2 - Português do Brasil:
+- **Português do Brasil (`app_pt_BR.arb`)**:
 
 ```json
 {
@@ -84,64 +91,56 @@ Em todos os arquivo deve ser usado a mesma chave para se referir a mesma traduç
 }
 ```
 
-Faça o reload da aplicação para as traduções serem geradas.
+## 5. Gere as Traduções
+
+Após criar os arquivos `.arb`, faça um reload da aplicação para que as traduções sejam geradas.
 
 ## Aplicação das Traduções
 
-Para usar as traduções, siga os passos abaixo:
+Para integrar as traduções no seu aplicativo Flutter, siga os passos abaixo:
 
-Nas importações cologue:
+### 1. Aplicar `AppLocalizations`
+
+Abra o arquivo onde está `MaterialApp`, e adicione a seguinte importação:
+
 ```dart
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 ```
 
-E cole o seguinte código em `MaterialApp`:
-
-```dart
-supportedLocales: L10n.all,
-locale: Locale('en'),
-localizationsDelegates: <LocalizationsDelegate>[
-AppLocalizations.delegate,
-GlobalMaterialLocalizations.delegate,
-GlobalWidgetsLocalizations.delegate,
-GlobalCupertinoLocalizations.delegate,
-],
-```
-
-Código completo:
+No `MaterialApp`, adicione as configurações para suportar a internacionalização:
 
 ```dart
 MaterialApp(
-    debugShowCheckedModeBanner: false,
-    supportedLocales: L10n.all,
-    locale: Locale('en'), // Idioma do aplicativo. Deve ser dinâmico para permitir a mudança de idioma.
-    localizationsDelegates: <LocalizationsDelegate>[
+  debugShowCheckedModeBanner: false,
+  supportedLocales: L10n.all,
+  locale: Locale('en'), // Idioma padrão do aplicativo. Deve ser dinâmico para permitir mudanças.
+  localizationsDelegates: <LocalizationsDelegate>[
     AppLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
-    ],
-    home: HomeScreen(),
+  ],
+  home: HomeScreen(),
 ),
 ```
 
-Para usar as traduções:
+### 3. Usar as Traduções
 
-Sempre cologue a importação do `AppLocalizations` onde for usar as traduções:
+Sempre que precisar usar as traduções, certifique-se de importar o `AppLocalizations`:
 
 ```dart
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 ```
 
-E o seguinte para usar as traduções:
+Para acessar as traduções, use:
 
 ```dart
-AppLocalizations.of(context)!.[nome da chave],
+AppLocalizations.of(context)!.nomeDaChave;
 ```
 
-## Exemplo de Aplicativo
+## Exemplo Completo
 
-Logo abaixo terá um exemplo da aplicação da internacionalização, com mudança de idioma dinâmico.
+Logo abaixo está um exemplo completo de como integrar e utilizar as traduções:
 
 ```dart
 import 'package:flutter/material.dart';
