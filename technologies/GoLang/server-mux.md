@@ -1,6 +1,8 @@
-# ServeMux no GoLang
+# Construindo um Servidor HTTP com ServeMux: O Roteador HTTP Padrão do Go
 
-O `ServeMux` é um roteador HTTP básico do Go, utilizado para associar URLs a funções de tratamento (handlers). Este guia explica como configurar e usar o `ServeMux` para criar um servidor HTTP básico, sem a necessidade de bibliotecas externas de roteamento.
+O `ServeMux` é um roteador HTTP básico do Go, utilizado para associar URLs a funções de tratamento (handlers). Ele é parte do pacote padrão `net/http` e oferece uma maneira simples e eficiente de criar servidores HTTP sem dependências externas. Neste guia, vamos aprender a configurar e usar o `ServeMux` para criar um servidor HTTP básico e gerenciar rotas, parâmetros e requisições.
+
+**Versão do Go utilizada: 1.23.4**
 
 ## 1. Criar o Servidor
 
@@ -41,17 +43,40 @@ Isso fará o servidor começar a escutar na URL `http://localhost:3030`.
 
 ## 2. Criar Rotas
 
-Para criar uma rota, use o método `HandleFunc` da instância `ServeMux` que criou. O primeiro argumento é o método da rota e o caminho, e o segundo é a função de tratamento para a requisição.
+Para criar uma rota, use o método `HandleFunc` da instância `ServeMux` que criou. O primeiro argumento é o método HTTP (POST, GET, PATCH, PUT, DELETE) e o caminho, e o segundo é a função de tratamento que será executada quando a requisição for feita.
 
 ### Exemplo de uma Rota Simples:
 
 ```go
+api.HandleFunc("GET /user", func(w http.ResponseWriter, r *http.Request) {})
+```
+
+### Funções de Retorno de Resposta
+
+Dentro dessa função, pode usar diferentes métodos para retornar respostas ao cliente, como `w.Write`, `http.Error` e `w.WriteHeader`:
+
+1. **`w.Write`**: Envia o corpo da resposta. Você pode usá-lo para retornar uma mensagem simples ou dados em formato JSON, por exemplo: `w.Write([]byte("User route"))` envia a mensagem "User route" como resposta.
+
+2. **`http.Error`**: Utilizado para enviar uma resposta de erro com um código de status e uma mensagem explicativa. Essa função é útil para indicar problemas, como quando uma rota não é encontrada ou há uma falha no servidor. Exemplo:
+
+```go
 api.HandleFunc("GET /user", func(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("User route"))
+	http.Error(w, "Usuário não encontrado", http.StatusNotFound)
 })
 ```
 
-Ao acessar a rota `http://localhost:3030/user`, a resposta será "User route".
+Isso retorna uma resposta com código 404 (não encontrado) e a mensagem "Usuário não encontrado".
+
+3. **`w.WriteHeader`**: Usada para definir o código de status HTTP da resposta. Se não for chamada explicitamente, o código de status será 200 (OK) por padrão. Exemplo:
+
+```go
+api.HandleFunc("GET /forbidden", func(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusForbidden)
+	w.Write([]byte("Acesso proibido"))
+})
+```
+
+Nesse caso, o código de status 403 (Proibido) será enviado junto com a mensagem "Acesso proibido".
 
 ### Como Testar a Rota:
 
@@ -68,7 +93,7 @@ Para capturar parâmetros dinâmicos de uma URL, defina a sua posição e nome. 
 ### Exemplo de Rota com Parâmetro de URL:
 
 ```go
-api.HandleFunc("/user/{id}", func(w http.ResponseWriter, r *http.Request) {
+api.HandleFunc("GET /user/{id}", func(w http.ResponseWriter, r *http.Request) {
 	userId := r.PathValue("id")  // Captura o valor do parâmetro {id} da URL
 
 	w.Write([]byte(userId))
@@ -92,7 +117,7 @@ Para acessar parâmetros de consulta (query parameters) da URL, use o método `r
 ### Exemplo de Acesso a Query Parameters:
 
 ```go
-api.HandleFunc("/user", func(w http.ResponseWriter, r *http.Request) {
+api.HandleFunc("GET /user", func(w http.ResponseWriter, r *http.Request) {
 	code := r.URL.Query().Get("code")  // Obtém o valor do query parameter "code"
 
 	w.Write([]byte(code))
@@ -109,7 +134,7 @@ curl "http://localhost:3030/user/123?code=abc"
 
 A resposta será "abc", que é o valor do parâmetro `code`.
 
-Obs.: Caso o parâmetro de consulta esteja ausente, o valor obtido será uma string vazia.
+Obs.: Caso o parâmetro de consulta esteja ausente, o valor será uma string vazia.
 
 ## 5. Acessar o Corpo da Requisição
 
@@ -125,7 +150,7 @@ if err != nil {
 ### Exemplo Completo:
 
 ```go
-api.HandleFunc("/user", func(w http.ResponseWriter, r *http.Request) {
+api.HandleFunc("POST /user", func(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -152,6 +177,7 @@ api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
     // Verifica se a requisição é para a rota principal
     if path == "/" {
         w.Write([]byte("Main route"))
+
         return
     }
 
@@ -160,7 +186,7 @@ api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 })
 ```
 
-Neste exemplo, quando a requisição for direcionada à rota `/`, a resposta será "Main route", caso a requisição seja para uma rota inexistente, a resposta será uma mensagem informando que a rota não existe, como: `Route '/nonexistent' does not exist.`.
+Neste exemplo, quando a requisição for direcionada à rota `/`, a resposta será "Main route", caso a requisição seja para uma rota inexistente, a resposta será uma mensagem informando que a rota não existe.
 
 ### Como Testar:
 
@@ -196,7 +222,7 @@ Acesse a URL:
 curl http://localhost:3030/main
 ```
 
-Ao acessar a URL `http://localhost:3030/main`, a resposta será "Home route", pois a rota `/main` está redirecionando para `/home`.
+Ao acessar a URL `http://localhost:3030/main`, a resposta será "Home route", pois a rota `/main` redirecionou para `/home`.
 
 ## Considerações Finais
 
