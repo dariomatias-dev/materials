@@ -86,6 +86,53 @@ Abra um terminal e use o comando `curl`:
 curl http://localhost:3030/user
 ```
 
+### Capturar Todas as Requisições que Começam com Determinado Prefixo
+
+Para criar uma rota que capture todas as requisições que começam com determinado prefixo, como "/user", basta usar o caminho `/user/`.
+
+### Exemplo de Código:
+
+```go
+api.HandleFunc("GET /user/", func(w http.ResponseWriter, r *http.Request) {
+	// Captura a parte da URL após "/user/"
+	path := r.URL.Path[len("/user/"):]
+
+	// Responde com o caminho capturado
+	w.Write([]byte(fmt.Sprintf("Requisição para /user/%s", path)))
+})
+```
+
+### Como Funciona:
+1. **Rota "/user/"**: `api.HandleFunc("/user/", ...)` captura todas as requisições que começam com "/user".
+2. **Captura do Caminho**: Dentro da função de tratamento, `r.URL.Path[len("/user/"):]` obtém a parte da URL após "/user/".
+3. **Resposta**: A resposta mostra a parte da URL após o prefixo.
+
+### Como Testar:
+
+- Para `/user/123`:
+
+```sh
+curl http://localhost:3030/user/123
+```
+
+Resposta: `Requisição para /user/123`
+
+- Para `/user/john`:
+
+```sh
+curl http://localhost:3030/user/john
+```
+
+Resposta: `Requisição para /user/john`
+
+- Para `/user/john/123`:
+
+```sh
+curl http://localhost:3030/user/john/123
+```
+
+Resposta: `Requisição para /user/john/123`
+
 ## 3. Acessar Parâmetros na URL
 
 Para capturar parâmetros dinâmicos de uma URL, defina a sua posição e nome. Para acessar os valores desses parâmetros, utilize o método `r.PathValue`.
