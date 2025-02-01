@@ -258,6 +258,137 @@ curl http://localhost:3030/main
 
 Ao acessar a URL **"http://localhost:3030/main"**, a resposta será **"Home route"**, pois a rota **"/main"** redirecionou para **"/home"**.
 
+## 8. Middlewares
+
+Middlewares são funções que interceptam requisições antes de chegarem ao handler final. Eles podem modificar a requisição, adicionar verificações ou interromper a execução.
+
+### Middleware Local
+
+É aplicado somente nas rotas que inserir.
+
+#### Exemplo
+
+No exemplo abaixo, o middleware verifica se o parâmetro **code** está presente na URL principal:
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+	api := http.NewServeMux()
+
+	api.Handle(
+		"/",
+		VerifyCodeMiddleware(
+			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Write([]byte("Main Route"))
+			}),
+		),
+	)
+
+	fmt.Println("Server Listening in http://localhost:3030")
+	if err := http.ListenAndServe(":3030", api); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func VerifyCodeMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		code := r.URL.Query().Get("code")
+		if code == "" {
+			http.Error(w, "code not provided", http.StatusBadGateway)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+```
+
+#### Como Funciona:
+
+- **Middleware**: Verifica se o parâmetro **code** está na URL.
+- **Interrupção**: Se **code** estiver ausente, retorna erro 502.
+- **Continuação**: Se **code** estiver presente, a requisição continua para o handler final.
+
+#### Como Testar:
+
+1. **Sem `code`**: Use `curl http://localhost:3030/` e a resposta será **"code not provided"**.
+2. **Com `code`**: Use `curl http://localhost:3030/?code=123` e a resposta será **"Main Route"**.
+
+### Middleware Global
+
+É aplicado a todas as rotas do servidor, não sendo necessário definir individualmente em cada rota.
+
+#### Exemplo
+
+No exemplo abaixo, o middleware verifica se o parâmetro **code** está presente na URL para todas as rotas do servidor:
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+	api := http.NewServeMux()
+
+	// Definindo rotas
+	api.Handle(
+		"/",
+		VerifyCodeMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte("Main Route"))
+		})),
+	)
+
+	api.Handle(
+		"/user",
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte("User Route"))
+		}),
+	)
+
+	// Aplicando middleware global
+	routes := VerifyCodeMiddleware(api)
+
+	fmt.Println("Server Listening in http://localhost:3030")
+	if err := http.ListenAndServe(":3030", routes); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func VerifyCodeMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		code := r.URL.Query().Get("code")
+		if code == "" {
+			http.Error(w, "code not provided", http.StatusBadGateway)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+```
+
+#### Como Funciona:
+
+- **Middleware Global**: O middleware **VerifyCodeMiddleware** é aplicado a todas as rotas definidas no servidor.
+- **Interrupção**: Se o parâmetro **code** não estiver presente, a requisição é bloqueada e um erro 502 é retornado.
+- **Continuação**: Se o parâmetro **code** estiver presente, a requisição continua normalmente para o handler final.
+
+#### Como Testar:
+
+1. **Sem `code`**: Use `curl http://localhost:3030/` ou `curl http://localhost:3030/user` para obter o erro **"code not provided"**.
+2. **Com `code`**: Use `curl http://localhost:3030/?code=123` ou `curl http://localhost:3030/user?code=123` para obter a resposta **"Main Route"** ou **"User Route"**.
+
 ## Considerações Finais
 
 O **ServeMux** é uma ferramenta simples e eficiente para gerenciar rotas HTTP em Go. Ele permite definir rotas de maneira intuitiva e oferece funcionalidades para manipulação de parâmetros na URL, query parameters e corpo da requisição. Por ser uma solução nativa, o ServeMux é capaz de atender a grande parte das necessidades de roteamento nas aplicações, dispensando a necessidade de pacotes adicionais e tornando o desenvolvimento mais direto e integrado com o ecossistema Go.
