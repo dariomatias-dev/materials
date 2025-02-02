@@ -264,11 +264,11 @@ Middlewares são funções que interceptam requisições antes de chegarem ao ha
 
 ### Middleware Local
 
-É aplicado somente nas rotas que inserir.
+É aplicado somente nas rotas que for adicionado.
 
 #### Exemplo
 
-No exemplo abaixo, o middleware verifica se o parâmetro **code** está presente na URL principal:
+O middleware irá verificar se o parâmetro **code** está presente na URL principal:
 
 ```go
 package main
@@ -312,22 +312,21 @@ func VerifyCodeMiddleware(next http.Handler) http.Handler {
 
 #### Como Funciona:
 
-- **Middleware**: Verifica se o parâmetro **code** está na URL.
-- **Interrupção**: Se **code** estiver ausente, retorna erro 502.
-- **Continuação**: Se **code** estiver presente, a requisição continua para o handler final.
+- O middleware verifica se o parâmetro **code** está na URL.
+- Se **code** estiver ausente, retorna erro 502; caso contrário, a requisição segue para o handler final.
 
 #### Como Testar:
 
-1. **Sem `code`**: Use `curl http://localhost:3030/` e a resposta será **"code not provided"**.
-2. **Com `code`**: Use `curl http://localhost:3030/?code=123` e a resposta será **"Main Route"**.
+1. **Sem `code`**: Use `curl http://localhost:3030` e a resposta será **"code not provided"**.
+2. **Com `code`**: Use `curl http://localhost:3030?code=123` e a resposta será **"Main Route"**.
 
 ### Middleware Global
 
-É aplicado a todas as rotas do servidor, não sendo necessário definir individualmente em cada rota.
+É aplicado a todas as rotas, dispensando a necessidade de ser adicionado individualmente em cada uma delas.
 
 #### Exemplo
 
-No exemplo abaixo, o middleware verifica se o parâmetro **code** está presente na URL para todas as rotas do servidor:
+O middleware irá verificar se o parâmetro **code** está presente na URL em todas as rotas do servidor:
 
 ```go
 package main
@@ -380,14 +379,14 @@ func VerifyCodeMiddleware(next http.Handler) http.Handler {
 
 #### Como Funciona:
 
-- **Middleware Global**: O middleware **VerifyCodeMiddleware** é aplicado a todas as rotas definidas no servidor.
-- **Interrupção**: Se o parâmetro **code** não estiver presente, a requisição é bloqueada e um erro 502 é retornado.
-- **Continuação**: Se o parâmetro **code** estiver presente, a requisição continua normalmente para o handler final.
+1. O middleware **VerifyCodeMiddleware** é aplicado a todas as rotas definidas no servidor.
+2. Se o parâmetro **code** não estiver presente, a requisição é bloqueada e um erro 502 é retornado.
+3. Se o parâmetro **code** estiver presente, a requisição continua normalmente para o handler final.
 
 #### Como Testar:
 
-1. **Sem `code`**: Use `curl http://localhost:3030/` ou `curl http://localhost:3030/user` para obter o erro **"code not provided"**.
-2. **Com `code`**: Use `curl http://localhost:3030/?code=123` ou `curl http://localhost:3030/user?code=123` para obter a resposta **"Main Route"** ou **"User Route"**.
+1. **Sem `code`**: Use `curl http://localhost:3030` ou `curl http://localhost:3030/user`, obtendo o erro **"code not provided"**.
+2. **Com `code`**: Use `curl http://localhost:3030?code=123` ou `curl http://localhost:3030/user?code=123`, obtendo a resposta **"Main Route"** ou **"User Route"**.
 
 ## Considerações Finais
 
