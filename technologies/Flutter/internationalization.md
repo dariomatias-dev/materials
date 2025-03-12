@@ -7,8 +7,8 @@ Para adicionar suporte à internacionalização no seu aplicativo Flutter, siga 
 Abra o arquivo `pubspec.yaml` e inclua `flutter_localizations` nas dependências de desenvolvimento:
 
 ```yaml
-dev_dependencies:
-  flutter_test:
+dependencies:
+  flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
@@ -20,9 +20,11 @@ Depois, execute o comando a seguir para instalar as dependências:
 flutter pub get
 ```
 
-## 2. Habilite Geração de Traduções
+## 2. Habilite a Geração de Traduções
 
-Em `pubspec.yaml`, adicione `generate: true` para permitir a geração automática das traduções:
+Para que o Flutter possa gerar automaticamente o código de tradução a partir dos arquivos .arb, precisa que seja habilitado a geração de código. Isso é feito no arquivo pubspec.yaml, onde adiciona a configuração `generate: true`.
+
+Para habilitar esse recurso, abra o arquivo pubspec.yaml do seu projeto, e no bddloco de configuração do Flutter (flutter), adicione a linha:
 
 ```yaml
 flutter:
@@ -46,38 +48,38 @@ output-localization-file: app_localizations.dart
 
 ## 4. Criação das Traduções
 
-1 - Na pasta `lib`, crie uma subpasta chamada `l10n` e adicione um arquivo `l10n.dart` com o seguinte código:
+A criação das traduções no Flutter envolve a definição dos idiomas suportados, a criação de arquivos de recursos `.arb` contendo as traduções específicas de cada idioma e a correta configuração do sistema de internacionalização.
+
+### 1. Criação do Arquivo de Configuração de Idiomas
+
+É necessário criar um arquivo responsável pela gestão dos idiomas disponíveis no aplicativo, da seguinte maneira:
+
+- Criar uma subpasta chamada `l10n` dentro da pasta `lib`.
+- Dentro da pasta `l10n`, criar um arquivo chamado `l10n.dart` com o seguinte conteúdo:
 
 ```dart
 import 'dart:ui';
 
 class L10n {
   static final all = <Locale>[
-    const Locale('en', ''),
-    const Locale('pt', 'BR'),
+    const Locale('en', ''),   // Inglês
+    const Locale('pt', 'BR'), // Português (Brasil)
+    // Outros idiomas
   ];
 }
 ```
 
-Nesta lista, adicione todos os idiomas que deseja oferecer suporte.
+No código acima, a lista `all` contém os idiomas que o aplicativo terá suporte. A chave `Locale` é composta por dois parâmetros: o código do idioma (como `en` para inglês e `pt` para português) e, opcionalmente, um subtipo para variantes do idioma (como `BR` para português do Brasil).
 
-2 - Na pasta `l10n`, crie arquivos para cada idioma seguindo o padrão de nomeação `app_[código do idioma].arb`. Em cada arquivo, defina o idioma das traduções assim:
+### 2. Criação dos Arquivos `.arb`
 
-```json
-{
-  "@@locale": "en"
-}
-```
+Os arquivos `.arb` (Application Resource Bundle) são usados para armazenar as traduções dos textos do aplicativo em diferentes idiomas. Cada idioma terá um arquivo `.arb` correspondente, e o nome desses arquivos deve seguir o padrão `app_[código do idioma].arb`, como `app_en.arb` para Inglês, `app_pt.arb` para português, e assim por diante.
 
-Obs.: Para idiomas variantes, é necessário definir uma língua base para garantir que, quando uma variante específica (como `pt_BR`) não estiver disponível ou completa, o sistema possa utilizar a versão genérica da língua (como `pt`). Isso assegura que o conteúdo da aplicação seja exibido corretamente, mesmo na ausência de traduções específicas, evitando erros e melhorando a experiência do usuário.
+Estrutura do Arquivo
 
-3 - Para criar as traduções, escolha uma chave e a use em todos os arquivos `.arb` com a respectiva tradução.
+Cada arquivo `.arb` deve conter a chave `@@locale`, que especifica o idioma do arquivo, como:
 
-Obs.: A chave deve ser idêntica em todos os arquivos. Se você usar nomes diferentes, serão consideradas chaves distintas, mesmo que se refiram à mesma palavra.
-
-### Exemplo de Traduções
-
-- **English (`app_en.arb`)**:
+- Inglês (app_en.arb):
 
 ```json
 {
@@ -87,7 +89,7 @@ Obs.: A chave deve ser idêntica em todos os arquivos. Se você usar nomes difer
 }
 ```
 
-- **Português (`app_pt.arb`)**:
+- Português (app_pt.arb):
 
 ```json
 {
@@ -97,7 +99,7 @@ Obs.: A chave deve ser idêntica em todos os arquivos. Se você usar nomes difer
 }
 ```
 
-- **Português do Brasil (`app_pt_BR.arb`)**:
+- Português do Brasil (app_pt_BR.arb):
 
 ```json
 {
@@ -107,37 +109,74 @@ Obs.: A chave deve ser idêntica em todos os arquivos. Se você usar nomes difer
 }
 ```
 
+### 3. Definição das Chaves de Tradução
+
+Dentro de cada arquivo `.arb`, as traduções são organizadas utilizando pares de chave e valor. A chave representa o identificador de um texto traduzido, enquanto o valor contém a tradução correspondente para o idioma do arquivo.
+
+As chaves devem ser únicas e descritivas, de modo a refletir claramente o texto que está sendo traduzido. Assim como idênticas em todos os arquivos `.arb`, se uma chave chamada "title" for utilizada em `app_en.arb`, ela deverá ser a mesma para `app_pt.arb` e `app_pt_BR.arb`.
+
+### 4. Variantes de Idioma
+
+Em algumas situações será necessário criar variantes de um idioma, como no caso do Português, que pode ter variações regionais (como o Português do Brasil). Quando isso ocorrer, será necessário criar arquivos `.arb` distintos para cada variante.
+
+O Flutter gerencia automaticamente as variantes de idioma. Caso uma tradução para uma variante específica não esteja disponível, o sistema utilizará a tradução do idioma base (como pt), garantindo que, mesmo na ausência de uma tradução específica, o texto será exibido corretamente, fazendo uso da tradução do idioma base.
+
 ## 5. Gere as Traduções
 
-Após criar os arquivos `.arb`, faça um reload da aplicação para que as traduções sejam geradas.
+Após a criação dos arquivos `.arb`, é necessário recarregar a aplicação para que o Flutter gere o código de tradução automaticamente.
 
 ## Aplicação das Traduções
 
-Para integrar as traduções no seu aplicativo Flutter, siga os passos abaixo:
+Para integrar e aplicar as traduções, siga os passos abaixo:
 
 ### 1. Aplicar `AppLocalizations`
 
-Abra o arquivo onde está `MaterialApp`, e adicione a seguinte importação:
+Primeiramente, importe o pacote `AppLocalizations` no arquivo onde o `MaterialApp` está configurado:
 
 ```dart
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 ```
 
-No `MaterialApp`, adicione as configurações para suportar a internacionalização:
+No `MaterialApp`, será adicionado as configurações necessárias para suportar a internacionalização e o gerenciamento dinâmico de idiomas. É importante destacar que a escolha do idioma do aplicativo pode ser dinâmica, permitindo que o idioma seja alterado conforme as configurações do sistema ou a seleção do usuário. Para isso, o `locale` do `MaterialApp` deve ser configurado de forma que possa ser alterado em tempo de execução.
 
 ```dart
 MaterialApp(
   debugShowCheckedModeBanner: false,
-  supportedLocales: L10n.all,
-  locale: Locale('en'), // Idioma padrão do aplicativo. Deve ser dinâmico para permitir mudanças.
+  supportedLocales: L10n.all, // Define os idiomas suportados
+  locale: Locale('en'), // Idioma padrão. O valor pode ser dinâmico
   localizationsDelegates: <LocalizationsDelegate>[
-    AppLocalizations.delegate,
+    AppLocalizations.delegate, // Responsável pelas traduções
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
   ],
   home: HomeScreen(),
 ),
+```
+
+### 2. Alteração Dinâmica do Idioma
+
+Para permitir que o idioma do aplicativo seja alterado durante a execução, pode usar um controlador ou notificador, como o `ValueNotifier`, gerenciando a alteração do `locale` no `MaterialApp`. Esse método permite que a alteração do idioma seja aplicada em tempo real, sem a necessidade de reiniciar o aplicativo.
+
+Exemplo de como implementar:
+
+```dart
+final _languageNotifier = ValueNotifier<String>('en'); // Idioma padrão: inglês
+
+MaterialApp(
+  debugShowCheckedModeBanner: false,
+  supportedLocales: L10n.all,
+  locale: Locale(_languageNotifier.value), // A língua é dinâmica
+  localizationsDelegates: <LocalizationsDelegate>[
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  home: HomeScreen(
+    languageNotifier: _languageNotifier,
+  ),
+);
 ```
 
 ### 3. Usar as Traduções
@@ -148,7 +187,7 @@ Sempre que precisar usar as traduções, certifique-se de importar o `AppLocaliz
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 ```
 
-Para acessar as traduções, use:
+Em seguida, para acessar as traduções, use:
 
 ```dart
 AppLocalizations.of(context)!.nomeDaChave;
