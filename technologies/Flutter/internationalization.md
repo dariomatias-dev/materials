@@ -1,10 +1,10 @@
-# Internacionalização no Flutter
+# Internacionalização no Flutter: Adaptando Aplicativos para Diferentes Idiomas e Regiões
 
-Para adicionar suporte à internacionalização no seu aplicativo Flutter, siga os passos abaixo:
+A internacionalização (i18n) no Flutter é essencial para adaptar aplicativos móveis a diferentes idiomas e formatos regionais. Neste material, vamos explorar como configurar o ambiente de internacionalização no Flutter, garantindo uma experiência personalizada e globalizada.
 
-## 1. Adicione Dependências
+## 1. Adicionar Dependência
 
-Abra o arquivo `pubspec.yaml` e inclua `flutter_localizations` nas dependências de desenvolvimento:
+Abra o arquivo `pubspec.yaml` e inclua a dependência `flutter_localizations` nas dependências do aplicativo:
 
 ```yaml
 dependencies:
@@ -14,17 +14,17 @@ dependencies:
     sdk: flutter
 ```
 
-Depois, execute o comando a seguir para instalar as dependências:
+Em seguida, baixe:
 
 ```bash
 flutter pub get
 ```
 
-## 2. Habilite a Geração de Traduções
+## 2. Habilitar Geração de Traduções
 
-Para que o Flutter possa gerar automaticamente o código de tradução a partir dos arquivos .arb, precisa que seja habilitado a geração de código. Isso é feito no arquivo pubspec.yaml, onde adiciona a configuração `generate: true`.
+Para que o Flutter possa gerar automaticamente o código de tradução a partir dos arquivos `.arb`, precisa que seja habilitado a geração de código. Isso é feito no arquivo `pubspec.yaml`, com a adição da configuração `generate: true`.
 
-Para habilitar esse recurso, abra o arquivo pubspec.yaml do seu projeto, e no bddloco de configuração do Flutter (flutter), adicione a linha:
+Para habilitar esse recurso, abra o arquivo `pubspec.yaml` do seu projeto, e no bloco de configuração do Flutter (flutter), adicione a linha:
 
 ```yaml
 flutter:
@@ -32,9 +32,9 @@ flutter:
   generate: true
 ```
 
-## 3. Crie o Arquivo de Configuração
+## 3. Criar Arquivo de Configuração
 
-Na raiz do seu projeto, crie um arquivo chamado `l10n.yaml`. Nele insira as seguintes configurações:
+Na raiz do projeto, crie um arquivo chamado `l10n.yaml`. Nele insira as seguintes configurações:
 
 ```yaml
 arb-dir: lib\l10n
@@ -54,8 +54,8 @@ A criação das traduções no Flutter envolve a definição dos idiomas suporta
 
 É necessário criar um arquivo responsável pela gestão dos idiomas disponíveis no aplicativo, da seguinte maneira:
 
-- Criar uma subpasta chamada `l10n` dentro da pasta `lib`.
-- Dentro da pasta `l10n`, criar um arquivo chamado `l10n.dart` com o seguinte conteúdo:
+- Crie uma pasta chamada `l10n` dentro de `lib`.
+- Dentro da pasta `l10n`, crie um arquivo chamado `l10n.dart` com o seguinte conteúdo:
 
 ```dart
 import 'dart:ui';
@@ -73,11 +73,11 @@ No código acima, a lista `all` contém os idiomas que o aplicativo terá suport
 
 ### 2. Criação dos Arquivos `.arb`
 
-Os arquivos `.arb` (Application Resource Bundle) são usados para armazenar as traduções dos textos do aplicativo em diferentes idiomas. Cada idioma terá um arquivo `.arb` correspondente, e o nome desses arquivos deve seguir o padrão `app_[código do idioma].arb`, como `app_en.arb` para Inglês, `app_pt.arb` para português, e assim por diante.
+Os arquivos `.arb` (Application Resource Bundle) são usados para armazenar as traduções em diferentes idiomas. Cada idioma terá um arquivo `.arb` correspondente, e o nome desses arquivos deve seguir o padrão `app_[código do idioma].arb`, como `app_en.arb` para Inglês, `app_pt.arb` para Português, e assim por diante.
 
-Estrutura do Arquivo
+**Estrutura do Arquivo**
 
-Cada arquivo `.arb` deve conter a chave `@@locale`, que especifica o idioma do arquivo, como:
+Todos os arquivos `.arb` devem conter a chave `@@locale`, que especifica o idioma do arquivo, e ficarem dentro da pasta `l10n`:
 
 - Inglês (app_en.arb):
 
@@ -111,17 +111,17 @@ Cada arquivo `.arb` deve conter a chave `@@locale`, que especifica o idioma do a
 
 ### 3. Definição das Chaves de Tradução
 
-Dentro de cada arquivo `.arb`, as traduções são organizadas utilizando pares de chave e valor. A chave representa o identificador de um texto traduzido, enquanto o valor contém a tradução correspondente para o idioma do arquivo.
+Nos arquivos `.arb`, as traduções são organizadas em pares de chave e valor. A chave é um identificador único e descritivo para o texto, e o valor é a tradução correspondente. 
 
-As chaves devem ser únicas e descritivas, de modo a refletir claramente o texto que está sendo traduzido. Assim como idênticas em todos os arquivos `.arb`, se uma chave chamada "title" for utilizada em `app_en.arb`, ela deverá ser a mesma para `app_pt.arb` e `app_pt_BR.arb`.
+As chaves devem ser idênticas em todos os arquivos `.arb` para garantir consistência. Por exemplo, se a chave "title" for usada em `app_en.arb`, ela deve ser a mesma em `app_pt.arb` e `app_pt_BR.arb`.
 
 ### 4. Variantes de Idioma
 
-Em algumas situações será necessário criar variantes de um idioma, como no caso do Português, que pode ter variações regionais (como o Português do Brasil). Quando isso ocorrer, será necessário criar arquivos `.arb` distintos para cada variante.
+Em algumas situações será necessário criar variantes de um idioma, como no caso do Português, que pode ter variações (como o Português do Brasil). Quando isso ocorrer, será necessário criar arquivos `.arb` distintos para cada variante. Lembrando que é obrigatório a presença do idioma base, não sendo aceito apenas a variante. Como no caso do Português do Brasil, é necessário que haja um arquivo `.arb` para o Português.
 
 O Flutter gerencia automaticamente as variantes de idioma. Caso uma tradução para uma variante específica não esteja disponível, o sistema utilizará a tradução do idioma base (como pt), garantindo que, mesmo na ausência de uma tradução específica, o texto será exibido corretamente, fazendo uso da tradução do idioma base.
 
-## 5. Gere as Traduções
+## 5. Uso
 
 Após a criação dos arquivos `.arb`, é necessário recarregar a aplicação para que o Flutter gere o código de tradução automaticamente.
 
@@ -131,7 +131,7 @@ Para integrar e aplicar as traduções, siga os passos abaixo:
 
 ### 1. Aplicar `AppLocalizations`
 
-Primeiramente, importe o pacote `AppLocalizations` no arquivo onde o `MaterialApp` está configurado:
+Primeiramente, importe o pacote `AppLocalizations` no arquivo onde o `MaterialApp` está:
 
 ```dart
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -161,12 +161,12 @@ Para permitir que o idioma do aplicativo seja alterado durante a execução, pod
 Exemplo de como implementar:
 
 ```dart
-final _languageNotifier = ValueNotifier<String>('en'); // Idioma padrão: inglês
+final _languageNotifier = ValueNotifier<String>('en'); // Idioma padrão: Inglês
 
 MaterialApp(
   debugShowCheckedModeBanner: false,
   supportedLocales: L10n.all,
-  locale: Locale(_languageNotifier.value), // A língua é dinâmica
+  locale: Locale(_languageNotifier.value), // O idioma é dinâmico
   localizationsDelegates: <LocalizationsDelegate>[
     AppLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
@@ -214,9 +214,9 @@ class Languages {
   ) {
     switch (language) {
       case ptBr:
-        return Locale('pt', 'BR');
+        return const Locale('pt', 'BR');
       default:
-        return Locale('en');
+        return const Locale('en');
     }
   }
 }
@@ -265,7 +265,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           supportedLocales: L10n.all,
           locale: Languages.getLocale(value),
-          localizationsDelegates: <LocalizationsDelegate>[
+          localizationsDelegates: const <LocalizationsDelegate>[
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -297,7 +297,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Text(
               AppLocalizations.of(context)!.title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w500,
               ),
@@ -305,7 +305,7 @@ class HomeScreen extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.description,
             ),
-            SizedBox(height: 12.0),
+            const SizedBox(height: 12.0),
             DropdownButtonHideUnderline(
               child: DropdownButton(
                 value: languageNotifier.value,
