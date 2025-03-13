@@ -1,8 +1,8 @@
-# Internacionalização no Flutter: Adaptando Aplicativos para Diferentes Idiomas e Regiões
+# Internacionalização no Flutter: Adaptando Aplicativos para Diferentes Idiomas
 
-A internacionalização (i18n) no Flutter é essencial para adaptar aplicativos móveis a diferentes idiomas e formatos regionais. Neste material, vamos explorar como configurar o ambiente de internacionalização no Flutter, garantindo uma experiência personalizada e globalizada.
+A internacionalização (i18n) no Flutter é essencial para adaptar aplicativos móveis a diferentes idiomas. Neste material, vamos explorar como configurar o ambiente de internacionalização no Flutter, garantindo uma experiência personalizada e globalizada.
 
-## 1. Adicionar Dependência
+## Adicionar Dependência
 
 Abra o arquivo `pubspec.yaml` e inclua a dependência `flutter_localizations` nas dependências do aplicativo:
 
@@ -14,15 +14,15 @@ dependencies:
     sdk: flutter
 ```
 
-Em seguida, baixe:
+Em seguida, baixe a dependência:
 
 ```bash
 flutter pub get
 ```
 
-## 2. Habilitar Geração de Traduções
+## Habilitar Geração de Traduções
 
-Para que o Flutter possa gerar automaticamente o código de tradução a partir dos arquivos `.arb`, precisa que seja habilitado a geração de código. Isso é feito no arquivo `pubspec.yaml`, com a adição da configuração `generate: true`.
+Para que o Flutter possa gerar automaticamente o código de tradução, precisa que seja habilitado a geração de código. Isso é feito no arquivo `pubspec.yaml`, com a adição da configuração `generate: true`.
 
 Para habilitar esse recurso, abra o arquivo `pubspec.yaml` do seu projeto, e no bloco de configuração do Flutter (flutter), adicione a linha:
 
@@ -32,7 +32,7 @@ flutter:
   generate: true
 ```
 
-## 3. Criar Arquivo de Configuração
+## Criar Arquivo de Configuração
 
 Na raiz do projeto, crie um arquivo chamado `l10n.yaml`. Nele insira as seguintes configurações:
 
@@ -46,7 +46,7 @@ output-localization-file: app_localizations.dart
 - **template-arb-file**: Especifica o arquivo de modelo que servirá de base para as traduções.
 - **output-localization-file**: Define o nome do arquivo onde as traduções geradas serão salvas.
 
-## 4. Criação das Traduções
+## Criação das Traduções
 
 A criação das traduções no Flutter envolve a definição dos idiomas suportados, a criação de arquivos de recursos `.arb` contendo as traduções específicas de cada idioma e a correta configuração do sistema de internacionalização.
 
@@ -55,7 +55,7 @@ A criação das traduções no Flutter envolve a definição dos idiomas suporta
 É necessário criar um arquivo responsável pela gestão dos idiomas disponíveis no aplicativo, da seguinte maneira:
 
 - Crie uma pasta chamada `l10n` dentro de `lib`.
-- Dentro da pasta `l10n`, crie um arquivo chamado `l10n.dart` com o seguinte conteúdo:
+- Dentro da pasta `l10n`, crie um arquivo chamado `l10n.dart` com o seguinte código:
 
 ```dart
 import 'dart:ui';
@@ -69,11 +69,11 @@ class L10n {
 }
 ```
 
-No código acima, a lista `all` contém os idiomas que o aplicativo terá suporte. A chave `Locale` é composta por dois parâmetros: o código do idioma (como `en` para inglês e `pt` para português) e, opcionalmente, um subtipo para variantes do idioma (como `BR` para português do Brasil).
+No código acima, a lista `all` contém os idiomas que o aplicativo terá suporte. A chave `Locale` é composta por dois parâmetros: o código do idioma (como `en` para Inglês e `pt` para Português) e, opcionalmente, um subtipo para variantes do idioma (como `BR` para Português do Brasil).
 
 ### 2. Criação dos Arquivos `.arb`
 
-Os arquivos `.arb` (Application Resource Bundle) são usados para armazenar as traduções em diferentes idiomas. Cada idioma terá um arquivo `.arb` correspondente, e o nome desses arquivos deve seguir o padrão `app_[código do idioma].arb`, como `app_en.arb` para Inglês, `app_pt.arb` para Português, e assim por diante.
+Os arquivos `.arb` (Application Resource Bundle) são usados para armazenar as traduções em diferentes idiomas. Cada idioma terá um arquivo `.arb` correspondente, e o nome desses arquivos deve seguir o padrão `app_[código do idioma].arb`, como `app_en.arb` para Inglês, `app_pt.arb` para Português, `app_pt_BR.arb` para Português do Brasil, e assim por diante.
 
 **Estrutura do Arquivo**
 
@@ -121,15 +121,11 @@ Em algumas situações será necessário criar variantes de um idioma, como no c
 
 O Flutter gerencia automaticamente as variantes de idioma. Caso uma tradução para uma variante específica não esteja disponível, o sistema utilizará a tradução do idioma base (como pt), garantindo que, mesmo na ausência de uma tradução específica, o texto será exibido corretamente, fazendo uso da tradução do idioma base.
 
-## 5. Uso
+## Uso
 
 Após a criação dos arquivos `.arb`, é necessário recarregar a aplicação para que o Flutter gere o código de tradução automaticamente.
 
-## Aplicação das Traduções
-
 Para integrar e aplicar as traduções, siga os passos abaixo:
-
-### 1. Aplicar `AppLocalizations`
 
 Primeiramente, importe o pacote `AppLocalizations` no arquivo onde o `MaterialApp` está:
 
@@ -332,3 +328,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 ```
+
+## Conclusão
+
+A internacionalização no Flutter é essencial para adaptar aplicativos a diversos idiomas, proporcionando uma experiência mais acessível e expandindo seu alcance global.
