@@ -1,7 +1,6 @@
 <br>
 <div align="center">
   <img src="https://img.shields.io/badge/status-ativo-brightgreen?style=for-the-badge" alt="Status do Repositório">
-  <img src="https://img.shields.io/github/license/dariomatias-dev/materials?style=for-the-badge" alt="Licença">
   <img src="https://img.shields.io/github/last-commit/dariomatias-dev/materials?style=for-the-badge" alt="Último Commit">
   <img src="https://img.shields.io/github/contributors/dariomatias-dev/materials?style=for-the-badge" alt="Contribuidores">
 </div>
