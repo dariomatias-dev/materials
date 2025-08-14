@@ -54,7 +54,7 @@ O objetivo aqui é preencher essa lacuna, oferecendo um ponto de partida sólido
 - [Dart](technologies/Dart/README.md)
 - [Firebase](technologies/Firebase/README.md)
 - [Flutter](technologies/Flutter/README.md)
-- [Git-And-GitHub](technologies/Git-And-GitHub/README.md)
+- [Git-And-GitHub](technologies/Git-And-Github/README.md)
 - [GoLang](technologies/GoLang/README.md)
 - [HTML-And-CSS](technologies/HTML-And-CSS/README.md)
 - [JavaScript](technologies/JavaScript/README.md)
@@ -94,7 +94,7 @@ Distribuído sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais inf
 
 Estou sempre aberto a discutir novos projetos e ideias. Sinta-se à vontade para entrar em contato.
 
-* **Portfólio:** [dariomatias-dev](https://github.com/dariomatias-dev)
+* **Portfólio:** [dariomatias-dev](https://dariomatias-dev.com)
 * **Email:** [matiasdario75@gmail.com](mailto:matiasdario75@gmail.com)
 * **Instagram:** [@dariomatias\_dev](https://www.instagram.com/dariomatias_dev)
 * **LinkedIn:** [linkedin.com/in/dariomatias-dev](https://www.linkedin.com/in/dariomatias-dev)
