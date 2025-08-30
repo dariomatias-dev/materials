@@ -9,7 +9,7 @@
 <h1 align="center">Guia de Deep Links no Flutter</h1>
 
 <p align="center">
-Um guia completo para implementar App e Deep Links em sua aplicação Flutter para experiências de usuário contínuas.  
+Um guia completo para implementar App e Deep Links em sua aplicação Flutter.
 <br>
 <a href="#sumário"><strong>Explore a documentação »</strong></a>
 
@@ -17,7 +17,6 @@ Um guia completo para implementar App e Deep Links em sua aplicação Flutter pa
 
 - [Sobre Deep Links](#sobre-deep-links)
   - [Documentação Oficial](#documentação-oficial)
-- [Conceitos Chave](#conceitos-chave)
 - [Desenvolvido Com](#desenvolvido-com)
 - [Primeiros Passos](#primeiros-passos)
   - [Pré-requisitos](#pré-requisitos)
@@ -40,17 +39,11 @@ Quando um usuário clica em um deep link, o sistema operacional verifica se um a
 - App Links: [Documentation](https://developer.android.com/training/app-links/verify-android-applinks?hl=pt-br)
 - Deep Links: [Documentation](https://developer.android.com/training/app-links/deep-linking?hl=pt-br)
 
-## Conceitos Chave
-
-- **Custom URI Schemes:** `myapp://product/123`. Fácil de configurar, menos seguro.
-- **Android App Links:** URLs HTTP/HTTPS verificadas. Exigem domínio e arquivo `assetlinks.json`.
-- **App Links e Universal Links:** oferecem segurança e fallback melhores que esquemas personalizados.
-
 ## Desenvolvido Com
 
-- **[Flutter](https://flutter.dev/)** Kit de ferramentas de UI do Google para construir aplicativos bonitos e nativamente compilados.
-- **[Dart](https://dart.dev/)** Linguagem usada para Flutter, otimizada para aplicativos rápidos.
-- **[app_links](https://pub.dev/packages/app_links):** Pacote Flutter para gerenciar e ouvir deep links.
+- **[Flutter](https://flutter.dev/)** – Kit de ferramentas de UI do Google para construir aplicativos bonitos e nativamente compilados.
+- **[Dart](https://dart.dev/)** – Linguagem usada para Flutter, otimizada para aplicativos rápidos.
+- **[app_links](https://pub.dev/packages/app_links/)** – Pacote Flutter para gerenciar e ouvir deep links.
 
 ## Primeiros Passos
 
@@ -61,7 +54,7 @@ Quando um usuário clica em um deep link, o sistema operacional verifica se um a
 
 ### Instalação
 
-Instale o pacote `app_links` no seu projeto:
+Crie um projeto Flutter, e instale o pacote `app_links` no seu projeto:
 
 ```bash
 flutter pub add app_links
@@ -156,11 +149,7 @@ class DeepLinkService {
 
   void init() async {
     try {
-      final initialLink = await _appLinks.getInitialLink();
-
-      if (initialLink != null) {
-        _handler.handle(initialLink);
-      }
+      await _appLinks.getInitialLink();
 
       _appLinks.uriLinkStream.listen(_handler.handle);
     } catch (err, stackTrace) {
@@ -194,7 +183,13 @@ class DeepLinkHandler {
         );
       } else {
         scaffoldMessengerKey.currentState?.showSnackBar(
-          SnackBar(content: Text('Invalid Link: ${uri.path}')),
+          SnackBar(
+            content: Text('Invalid Link: ${uri.path}'),
+            action: SnackBarAction(
+              label: 'Ok',
+              onPressed: () {},
+            ),
+          ),
         );
       }
     }
@@ -235,24 +230,28 @@ class ProductScreen extends StatelessWidget {
 No arquivo `AndroidManifest.xml` localizado em `android/app/src/main/AndroidManifest.xml`, adicione o seguinte código dentro da tag `activity`:
 
 ```xml
-<!-- App Link to https://<webdomain>.com -->
+<!-- App Link para o domínio do seu site -->
 <intent-filter android:autoVerify="true">
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
+
+    <!-- Troque "yourdomain.com" pelo domínio real do seu site -->
     <data
         android:scheme="https"
-        android:host="<webdomain>.com"
+        android:host="yourdomain.com"
         android:pathPrefix="/" />
 </intent-filter>
 
-<!-- Deep Link to https://<webdomain>.com -->
+<!-- Deep Link personalizado do seu aplicativo -->
 <intent-filter>
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
+
+    <!-- Troque "myapp" e "open.app" pelos valores que desejar -->
     <data
-        android:scheme="domain"
+        android:scheme="myapp"
         android:host="open.app" />
 </intent-filter>
 ```
@@ -267,11 +266,11 @@ Clique na opção de `Adicionar domínio`:
 
 <img src="images/play_console_deep_link_add_domain.png" alt="Adicionar domínio" />
 
-No campo `Passo 1. Adicione os detalhes do domínio`, adicione o nome do domínio do seu aplicativo:
+No campo `Passo 1. Adicione os detalhes do domínio`, insira o domínio do seu site:
 
 <img src="images/play_console_deep_link_add_domain_name.png" alt="Adicionar nome do domínio" />
 
-Depois copie o json gerado:
+Depois copie o JSON gerado:
 
 <img src="images/play_console_deep_link_copy_json.png" alt="Copiar json do assetlinks.json" />
 
@@ -296,33 +295,37 @@ Que será algo como:
 Após copiar o arquivo JSON, ele deve ser adicionado no caminho `/.well-known/assetlinks.json` do domínio configurado, de forma que esteja acessível através da URL:
 `https://dominio.com/.well-known/assetlinks.json`.
 
-No caso de projetos desenvolvidos com React ou Next.js, basta criar a pasta `.well-known` dentro do diretório `public` e adicionar o arquivo `assetlinks.json` nela com o JSON gerado.
+No caso de projetos desenvolvidos com React ou Next.js, basta criar a pasta `.well-known` dentro do diretório `public` e adicionar o arquivo `assetlinks.json` com o JSON gerado.
 
 ### Testando Deep Links
 
-#### Comandos ADB
+#### Usando Comandos ADB
+
+Para testar deep links no Android, execute um dos seguintes comandos:
 
 ```bash
-adb shell am start -a android.intent.action.VIEW -d "myscheme://<webdomain>.com/product/abc"
+adb shell am start -a android.intent.action.VIEW -d "https://yourdomain.com/product/abc" com.yourcompany.yourapp
 ```
 
-ou
+Sem `com.yourcompany.yourapp`, o link será aberto no navegador em vez do aplicativo.
+
+Ou, se estiver utilizando um esquema personalizado:
 
 ```bash
-adb shell am start -a android.intent.action.VIEW -d "https://<webdomain>.com" com.yourcompany.yourapp
+adb shell am start -a android.intent.action.VIEW -d "myscheme://open.app/product/abc"
 ```
 
-#### Observações
+#### Observações Importantes
 
-Mesmo construindo o app com:
+Mesmo que o aplicativo seja construído com:
 
 ```bash
 flutter build apk --release
 ```
 
-O deep link só abrirá diretamente o aplicativo se ele tiver sido instalado pela Google Play Store. Caso contrário, o link será aberto no navegador.
+O deep link só será aberto diretamente no aplicativo se ele tiver sido instalado pela Google Play Store. Caso contrário, o link será redirecionado para o navegador.
 
-Para permitir que o aplicativo abra links do domínio configurado, ative a opção nas configurações do Android:
+Para permitir que o aplicativo abra links do domínio configurado, habilite a opção nas configurações do Android:
 
 ```
 Configurações do Android > Aplicativos > <Seu Aplicativo> > Abrir links suportados > Abrir no aplicativo
